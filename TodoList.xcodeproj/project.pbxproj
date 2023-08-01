@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D16C03412A77C395000F48E3 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C03402A77C395000F48E3 /* TodoViewController.swift */; };
 		D177BC782A778FEA005FD039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177BC772A778FEA005FD039 /* AppDelegate.swift */; };
 		D177BC7A2A778FEA005FD039 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177BC792A778FEA005FD039 /* SceneDelegate.swift */; };
 		D177BC7C2A778FEA005FD039 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177BC7B2A778FEA005FD039 /* ViewController.swift */; };
@@ -16,6 +17,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D16C03402A77C395000F48E3 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		D177BC742A778FEA005FD039 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D177BC772A778FEA005FD039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D177BC792A778FEA005FD039 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 				D177BC772A778FEA005FD039 /* AppDelegate.swift */,
 				D177BC792A778FEA005FD039 /* SceneDelegate.swift */,
 				D177BC7B2A778FEA005FD039 /* ViewController.swift */,
+				D16C03402A77C395000F48E3 /* TodoViewController.swift */,
 				D177BC7D2A778FEA005FD039 /* Main.storyboard */,
 				D177BC802A778FEA005FD039 /* Assets.xcassets */,
 				D177BC822A778FEA005FD039 /* LaunchScreen.storyboard */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D16C03412A77C395000F48E3 /* TodoViewController.swift in Sources */,
 				D177BC7C2A778FEA005FD039 /* ViewController.swift in Sources */,
 				D177BC782A778FEA005FD039 /* AppDelegate.swift in Sources */,
 				D177BC7A2A778FEA005FD039 /* SceneDelegate.swift in Sources */,
