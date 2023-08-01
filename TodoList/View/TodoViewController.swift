@@ -7,12 +7,12 @@
 
 import UIKit
 
+struct TodoItem: Codable {
+    var title: String
+    var isCompleted: Bool
+}
+
 class TodoViewController: UITableViewController {
-    
-    struct TodoItem {
-        var title: String
-        var isCompleted: Bool
-    }
     
     var todoItems: [TodoItem] = []
     
@@ -20,6 +20,21 @@ class TodoViewController: UITableViewController {
         super.viewDidLoad()
         setupNavigationBar()
         tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoCell")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let data = UserDefaults.standard.value(forKey: "todoItems") as? Data {
+            if let savedTodoItems = try? JSONDecoder().decode([TodoItem].self, from: data) {
+                todoItems = savedTodoItems
+                tableView.reloadData()
+            }
+        }
     }
     
     func setupNavigationBar() {
@@ -76,22 +91,15 @@ class TodoViewController: UITableViewController {
                 cell.textLabel?.attributedText = NSAttributedString(string: todoItems[index].title, attributes: [.strikethroughStyle: NSUnderlineStyle(rawValue: 0)])
             }
         }
-    }
-}
-// 커스텀 디자인 셀, 동적 콘텐츠 구현
-class TodoTableViewCell: UITableViewCell {
-    let toggleSwitch = UISwitch()
-
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        contentView.addSubview(toggleSwitch)
-        toggleSwitch.translatesAutoresizingMaskIntoConstraints = false
-        toggleSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
-        toggleSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+        if sender.isOn {
+            moveToCompleted(at: index)
+        }
     }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    
+    func moveToCompleted(at index: Int) {
+        let completedItem = todoItems.remove(at: index)
+        DataManager.shared.completedItems.append(completedItem)
+        tableView.reloadData()
     }
 }

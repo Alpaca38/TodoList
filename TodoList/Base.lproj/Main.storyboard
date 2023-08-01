@@ -43,7 +43,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="완료한일 보기"/>
                                 <connections>
-                                    <segue destination="pGT-ss-acz" kind="show" id="WCl-Uh-82a"/>
+                                    <segue destination="MiV-tc-vKr" kind="show" id="m2h-C9-JpH"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sn3-3e-UkW">
@@ -52,7 +52,7 @@
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="할일 확인하기"/>
                                 <connections>
-                                    <segue destination="tFP-sk-LeM" kind="show" id="c35-5B-4qw"/>
+                                    <segue destination="tFP-sk-LeM" kind="show" id="RDJ-ib-eU4"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -69,22 +69,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="687.78625954198469" y="-407.04225352112678"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="x0d-Iu-UeI">
-            <objects>
-                <viewController id="pGT-ss-acz" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="icn-rl-odW">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="GR5-pA-Rte"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="Xqz-8U-Mic"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="hLO-Me-3KT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1506" y="160"/>
         </scene>
         <!--Todo View Controller-->
         <scene sceneID="jde-A2-exf">
@@ -115,6 +99,35 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eRG-Qr-HdX" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1540" y="-577"/>
+        </scene>
+        <!--Completed View Controller-->
+        <scene sceneID="3B6-QY-C0l">
+            <objects>
+                <tableViewController storyboardIdentifier="ShowCompleted" id="MiV-tc-vKr" customClass="CompletedViewController" customModule="TodoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Exx-SY-C0z">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CompletedTodoCell" id="BQl-62-WHE">
+                                <rect key="frame" x="0.0" y="50" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BQl-62-WHE" id="q05-nC-WiK">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="MiV-tc-vKr" id="kKz-Nm-ezJ"/>
+                            <outlet property="delegate" destination="MiV-tc-vKr" id="psz-dd-15j"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="rZb-Pb-P8z"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gTG-EX-Q5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1540" y="130"/>
         </scene>
     </scenes>
     <resources>
