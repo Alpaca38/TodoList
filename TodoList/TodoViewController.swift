@@ -19,8 +19,7 @@ class TodoViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupNavigationBar()
-        tableView.reloadData()
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "TodoCell")
+        tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoCell")
     }
     
     func setupNavigationBar() {
@@ -50,25 +49,11 @@ class TodoViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoTableViewCell
         let todoItem = todoItems[indexPath.row]
-        cell.textLabel?.text = todoItem.title
-        
-        for subview in cell.contentView.subviews {
-            subview.removeFromSuperview()
-        }
-        
-        let toggleSwitch = UISwitch()
-        toggleSwitch.isOn = todoItem.isCompleted
-        toggleSwitch.addTarget(self, action: #selector(toggleCompletion), for: .valueChanged)
-        toggleSwitch.tag = indexPath.row
-        
-        cell.contentView.addSubview(toggleSwitch)
-        
-        toggleSwitch.translatesAutoresizingMaskIntoConstraints = false
-        toggleSwitch.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor, constant: -16).isActive = true
-        toggleSwitch.centerYAnchor.constraint(equalTo: cell.contentView.centerYAnchor).isActive = true
-        
+        cell.toggleSwitch.isOn = todoItem.isCompleted
+        cell.toggleSwitch.addTarget(self, action: #selector(toggleCompletion), for: .valueChanged)
+        cell.toggleSwitch.tag = indexPath.row
         
         if todoItem.isCompleted {
             cell.textLabel?.attributedText = NSAttributedString(string: todoItem.title, attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
@@ -81,22 +66,32 @@ class TodoViewController: UITableViewController {
     
     @objc func toggleCompletion(_ sender: UISwitch) {
         let index = sender.tag
-        var todoItem = todoItems[index]
-        todoItem.isCompleted = sender.isOn
-        todoItems[index] = todoItem
+        todoItems[index].isCompleted = sender.isOn
+        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         
         if let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) {
-            if todoItem.isCompleted {
-                cell.textLabel?.attributedText = NSAttributedString(string: todoItem.title, attributes: [.strikethroughStyle : NSUnderlineStyle.single.rawValue])
+            if todoItems[index].isCompleted {
+                cell.textLabel?.attributedText = NSAttributedString(string: todoItems[index].title, attributes: [.strikethroughStyle : NSUnderlineStyle.single.rawValue])
             } else {
-                cell.textLabel?.attributedText = NSAttributedString(string: todoItem.title, attributes: [.strikethroughStyle: NSUnderlineStyle(rawValue: 0)])
+                cell.textLabel?.attributedText = NSAttributedString(string: todoItems[index].title, attributes: [.strikethroughStyle: NSUnderlineStyle(rawValue: 0)])
             }
         }
     }
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedTodo = todoItems[indexPath.row]
-        let newCompletedState = !selectedTodo.isCompleted
-        todoItems[indexPath.row].isCompleted = newCompletedState
-        tableView.reloadRows(at: [indexPath], with: .automatic)
+}
+// 커스텀 디자인 셀, 동적 콘텐츠 구현
+class TodoTableViewCell: UITableViewCell {
+    let toggleSwitch = UISwitch()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        contentView.addSubview(toggleSwitch)
+        toggleSwitch.translatesAutoresizingMaskIntoConstraints = false
+        toggleSwitch.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16).isActive = true
+        toggleSwitch.centerYAnchor.constraint(equalTo: contentView.centerYAnchor).isActive = true
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 }
