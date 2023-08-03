@@ -131,19 +131,31 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
         }
     }
     
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            todoItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
     func moveToCompleted(at index: Int) {
         let completedItem = todoItems.remove(at: index)
+        UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
         DataManager.shared.completedItems.append(completedItem)
+        UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
         tableView.reloadData()
     }
     
     func deleteTodoItem(_ item: TodoItem) {
         if let index = todoItems.firstIndex(where: { $0.title == item.title}) {
             todoItems.remove(at: index)
-//            tableView.deleteRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
             UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
             tableView.reloadData()
-            print("\(todoItems)")
         }
     }
 }

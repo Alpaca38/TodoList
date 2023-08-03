@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompletedViewController: UITableViewController {
+class CompletedViewController: UITableViewController, TodoDetailViewControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,7 +15,12 @@ class CompletedViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
+        if let data = UserDefaults.standard.value(forKey: "completedItems") as? Data {
+            if let savedTodoItems = try? JSONDecoder().decode([TodoItem].self, from: data) {
+                DataManager.shared.completedItems = savedTodoItems
+                tableView.reloadData()
+            }
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -43,6 +48,7 @@ class CompletedViewController: UITableViewController {
             if let todoDetailVC = segue.destination as? TodoDetailViewController,
                let selectedTodoItem = sender as? TodoItem {
                 todoDetailVC.todoItem = selectedTodoItem
+                todoDetailVC.delegate = self
             }
         }
     }
@@ -51,6 +57,14 @@ class CompletedViewController: UITableViewController {
         cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
         UIView.animate(withDuration: 0.5) {
             cell.transform = CGAffineTransform.identity
+        }
+    }
+    
+    func deleteTodoItem(_ item: TodoItem) {
+        if let index = DataManager.shared.completedItems.firstIndex(where: { $0.title == item.title}) {
+            DataManager.shared.completedItems.remove(at: index)
+            UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
+            tableView.reloadData()
         }
     }
 }
