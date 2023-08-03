@@ -10,9 +10,10 @@ import UIKit
 struct TodoItem: Codable {
     var title: String
     var isCompleted: Bool
+    var dueDate: Date?
 }
 
-class TodoViewController: UITableViewController {
+class TodoViewController: UITableViewController, TodoDetailViewControllerDelegate {
     
     var todoItems: [TodoItem] = []
     
@@ -24,7 +25,6 @@ class TodoViewController: UITableViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,10 +45,19 @@ class TodoViewController: UITableViewController {
     @objc func addTodoItem() {
         let alertController = UIAlertController(title: "할 일 추가", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in textField.placeholder = "할 일을 입력하세요"}
+        alertController.addTextField { textField in textField.placeholder = "마감일: yyyy-MM-dd HH:mm"}
+        //뷰 컨트롤러 내에서 클로저를 사용할 때 인스턴스를 사용해야한다면 약한참조를 해야 함! 메모리 누수 방지
         let addAction = UIAlertAction(title: "추가", style: .default) { [weak self, weak alertController] _ in
             if let textField = alertController?.textFields?.first, let title = textField.text, !title.isEmpty {
-                let newTodoItem = TodoItem(title: title, isCompleted: false )
+                let dueDateTextField = alertController?.textFields?[1]
+                let dueDateText = dueDateTextField?.text
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
+                let dueDate = dateFormatter.date(from: dueDateText ?? "")
+                
+                let newTodoItem = TodoItem(title: title, isCompleted: false, dueDate: dueDate )
                 self?.todoItems.append(newTodoItem)
+                UserDefaults.standard.set(try? JSONEncoder().encode(self?.todoItems), forKey: "todoItems")
                 self?.tableView.reloadData()
             }
         }
@@ -97,9 +106,56 @@ class TodoViewController: UITableViewController {
         }
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedTodoItem = todoItems[indexPath.row]
+        performSegue(withIdentifier: "ShowTodoDetail", sender: selectedTodoItem)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowTodoDetail" {
+            //segue.destination은 UIViewController 타입을 반환하므로 TodoDetailViewController 캐스팅
+            //sender: 세그웨이에서 전달되는 데이터
+            if let todoDetailVC = segue.destination as? TodoDetailViewController,
+               let selectedTodoItem = sender as? TodoItem {
+                todoDetailVC.todoItem = selectedTodoItem
+                //상호작용 가능
+                todoDetailVC.delegate = self
+            }
+        }
+    }
+    // fade-in animation
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.5) {
+            cell.alpha = 1
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            todoItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
     func moveToCompleted(at index: Int) {
         let completedItem = todoItems.remove(at: index)
+        UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
         DataManager.shared.completedItems.append(completedItem)
+        UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
         tableView.reloadData()
+    }
+    
+    func deleteTodoItem(_ item: TodoItem) {
+        if let index = todoItems.firstIndex(where: { $0.title == item.title}) {
+            todoItems.remove(at: index)
+            UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
+            tableView.reloadData()
+        }
     }
 }
