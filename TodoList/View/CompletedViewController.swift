@@ -30,4 +30,20 @@ class CompletedViewController: UITableViewController {
         
         return cell
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedTodoItem = DataManager.shared.completedItems[indexPath.row]
+        performSegue(withIdentifier: "ShowTodoDetail", sender: selectedTodoItem)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "ShowTodoDetail" {
+            //segue.destination은 UIViewController 타입을 반환하므로 TodoDetailViewController 캐스팅
+            //sender: 세그웨이에서 전달되는 데이터
+            if let todoDetailVC = segue.destination as? TodoDetailViewController,
+               let selectedTodoItem = sender as? TodoItem {
+                todoDetailVC.todoItem = selectedTodoItem
+            }
+        }
+    }
 }
