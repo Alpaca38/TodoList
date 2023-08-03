@@ -33,12 +33,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pencil" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="GPQ-1h-gxB">
-                                <rect key="frame" x="76" y="243" width="240" height="128"/>
+                                <rect key="frame" x="76" y="266" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" systemColor="systemCyanColor"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XZ-2W-a8m">
-                                <rect key="frame" x="138" y="504" width="117" height="35"/>
+                                <rect key="frame" x="138" y="499" width="117" height="35"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="완료한일 보기"/>
@@ -47,7 +47,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sn3-3e-UkW">
-                                <rect key="frame" x="138" y="437" width="117" height="29"/>
+                                <rect key="frame" x="138" y="432" width="117" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="할일 확인하기"/>
@@ -217,7 +217,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="rZb-Pb-P8z"/>
                     <connections>
-                        <segue destination="W38-JE-Jqv" kind="show" identifier="ShowTodoDetail" id="td9-1t-vnd"/>
+                        <segue destination="W38-JE-Jqv" kind="show" identifier="ShowTodoDetail" animates="NO" id="td9-1t-vnd"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gTG-EX-Q5J" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -226,7 +226,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kP5-yz-SAe"/>
+        <segue reference="td9-1t-vnd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>
