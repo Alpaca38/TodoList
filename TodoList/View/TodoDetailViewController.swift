@@ -13,6 +13,14 @@ class TodoDetailViewController: UIViewController {
         super.viewDidLoad()
         updateUI()
     }
+    //하단에서 slide-in
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        view.transform = CGAffineTransform(translationX: 0, y: view.frame.height)
+        UIView.animate(withDuration: 0.5) {
+            self.view.transform = .identity
+        }
+    }
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!

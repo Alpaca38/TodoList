@@ -123,6 +123,13 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
             }
         }
     }
+    // fade-in animation
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.alpha = 0
+        UIView.animate(withDuration: 0.5) {
+            cell.alpha = 1
+        }
+    }
     
     func moveToCompleted(at index: Int) {
         let completedItem = todoItems.remove(at: index)

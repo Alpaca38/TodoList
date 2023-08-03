@@ -46,4 +46,11 @@ class CompletedViewController: UITableViewController {
             }
         }
     }
+    //작아졌다 커지는 애니메이션
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        cell.transform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        UIView.animate(withDuration: 0.5) {
+            cell.transform = CGAffineTransform.identity
+        }
+    }
 }
