@@ -94,8 +94,24 @@
                             <outlet property="delegate" destination="tFP-sk-LeM" id="gCY-we-2Af"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="yhu-UZ-aAf"/>
+                    <navigationItem key="navigationItem" id="yhu-UZ-aAf">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="2W3-G5-Kll">
+                                <connections>
+                                    <action selector="addTodoItem:" destination="tFP-sk-LeM" id="2F1-kq-DzI"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="Edit" id="N9Q-Aj-8x5">
+                                <connections>
+                                    <action selector="editTableWith_sender:" destination="tFP-sk-LeM" id="bW3-rZ-YBc"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
                     <connections>
+                        <outlet property="addTodoButton" destination="2W3-G5-Kll" id="YIA-BO-HNw"/>
+                        <outlet property="editDoneButton" destination="N9Q-Aj-8x5" id="4bq-cC-0Og"/>
+                        <outlet property="editTableView" destination="Ieb-3x-J48" id="5Vu-pF-FB0"/>
                         <segue destination="W38-JE-Jqv" kind="show" identifier="ShowTodoDetail" animates="NO" id="kP5-yz-SAe"/>
                     </connections>
                 </tableViewController>
@@ -226,7 +242,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="td9-1t-vnd"/>
+        <segue reference="kP5-yz-SAe"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="pencil" catalog="system" width="128" height="113"/>
