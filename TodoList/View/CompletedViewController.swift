@@ -67,4 +67,16 @@ class CompletedViewController: UITableViewController, TodoDetailViewControllerDe
             tableView.reloadData()
         }
     }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            DataManager.shared.completedItems.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        return .delete
+    }
 }
