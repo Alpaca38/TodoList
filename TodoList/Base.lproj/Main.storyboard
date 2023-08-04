@@ -101,7 +101,7 @@
                                     <action selector="addTodoItem:" destination="tFP-sk-LeM" id="2F1-kq-DzI"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem title="Edit" style="plain" id="N9Q-Aj-8x5">
+                            <barButtonItem title="Edit" id="N9Q-Aj-8x5">
                                 <connections>
                                     <action selector="editTableWith_sender:" destination="tFP-sk-LeM" id="bW3-rZ-YBc"/>
                                 </connections>
