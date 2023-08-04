@@ -130,7 +130,7 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
         if editingStyle == .delete {
             todoItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
+            saveTodoItem()
         }
     }
     
