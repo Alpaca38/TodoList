@@ -17,27 +17,24 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
     
     var todoItems: [TodoItem] = []
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupNavigationBar()
-        tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoCell")
+    @IBOutlet weak var editTableView: UITableView!
+    
+    @IBOutlet weak var editDoneButton: UIBarButtonItem!
+    //버튼으로 isEditing모드 전환
+    @IBAction func editTable(_sender: Any) {
+        if self.editTableView.isEditing {
+            self.editDoneButton.title = "Edit"
+            self.editTableView.setEditing(false, animated: true)
+        } else {
+            self.editDoneButton.title = "Done"
+            self.editTableView.setEditing(true, animated: true)
+        }
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
+    @IBOutlet weak var addTodoButton: UIBarButtonItem!
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        loadTodoItem()
-    }
     
-    func setupNavigationBar() {
-        title = "Todo List"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addTodoItem))
-    }
-    
-    @objc func addTodoItem() {
+    @IBAction func addTodoItem(_ sender: Any) {
         let alertController = UIAlertController(title: "할 일 추가", message: nil, preferredStyle: .alert)
         alertController.addTextField { textField in textField.placeholder = "할 일을 입력하세요"}
         alertController.addTextField { textField in textField.placeholder = "마감일: yyyy-MM-dd HH:mm"}
@@ -63,6 +60,28 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
         present(alertController, animated: true, completion: nil)
     }
     
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.editTableView.dataSource = self
+        self.editTableView.delegate = self
+        setupNavigationBar()
+        tableView.register(TodoTableViewCell.self, forCellReuseIdentifier: "TodoCell")
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        loadTodoItem()
+    }
+    
+    func setupNavigationBar() {
+        title = "Todo List"
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return todoItems.count
     }
@@ -79,7 +98,6 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
         } else {
             cell.textLabel?.attributedText = NSAttributedString(string: todoItem.title, attributes: [.strikethroughStyle: NSUnderlineStyle(rawValue: 0)])
         }
-        
         return cell
     }
     
@@ -136,6 +154,17 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
+    }
+    
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    override func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        let itemToMove = todoItems[sourceIndexPath.row]
+        todoItems.remove(at: sourceIndexPath.row)
+        todoItems.insert(itemToMove, at: destinationIndexPath.row)
+        saveTodoItem()
     }
     
     func moveToCompleted(at index: Int) {
