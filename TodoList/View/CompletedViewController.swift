@@ -15,12 +15,7 @@ class CompletedViewController: UITableViewController, TodoDetailViewControllerDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let data = UserDefaults.standard.value(forKey: "completedItems") as? Data {
-            if let savedTodoItems = try? JSONDecoder().decode([TodoItem].self, from: data) {
-                DataManager.shared.completedItems = savedTodoItems
-                tableView.reloadData()
-            }
-        }
+        loadCompletedItem()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -63,7 +58,7 @@ class CompletedViewController: UITableViewController, TodoDetailViewControllerDe
     func deleteTodoItem(_ item: TodoItem) {
         if let index = DataManager.shared.completedItems.firstIndex(where: { $0.title == item.title}) {
             DataManager.shared.completedItems.remove(at: index)
-            UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
+            saveCompletedItem()
             tableView.reloadData()
         }
     }
@@ -72,11 +67,24 @@ class CompletedViewController: UITableViewController, TodoDetailViewControllerDe
         if editingStyle == .delete {
             DataManager.shared.completedItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
+            saveCompletedItem()
         }
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
+    }
+    
+    func saveCompletedItem() {
+        UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
+    }
+    
+    func loadCompletedItem() {
+        if let data = UserDefaults.standard.value(forKey: "completedItems") as? Data {
+            if let savedTodoItems = try? JSONDecoder().decode([TodoItem].self, from: data) {
+                DataManager.shared.completedItems = savedTodoItems
+                tableView.reloadData()
+            }
+        }
     }
 }

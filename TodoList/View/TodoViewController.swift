@@ -29,12 +29,7 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let data = UserDefaults.standard.value(forKey: "todoItems") as? Data {
-            if let savedTodoItems = try? JSONDecoder().decode([TodoItem].self, from: data) {
-                todoItems = savedTodoItems
-                tableView.reloadData()
-            }
-        }
+        loadTodoItem()
     }
     
     func setupNavigationBar() {
@@ -57,7 +52,7 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
                 
                 let newTodoItem = TodoItem(title: title, isCompleted: false, dueDate: dueDate )
                 self?.todoItems.append(newTodoItem)
-                UserDefaults.standard.set(try? JSONEncoder().encode(self?.todoItems), forKey: "todoItems")
+                self?.saveTodoItem()
                 self?.tableView.reloadData()
             }
         }
@@ -145,9 +140,9 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
     
     func moveToCompleted(at index: Int) {
         let completedItem = todoItems.remove(at: index)
-        UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
+        saveTodoItem()
         DataManager.shared.completedItems.append(completedItem)
-        UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
+        saveCompletedItem()
         tableView.reloadData()
     }
     
@@ -156,6 +151,23 @@ class TodoViewController: UITableViewController, TodoDetailViewControllerDelegat
             todoItems.remove(at: index)
             UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
             tableView.reloadData()
+        }
+    }
+    
+    func saveTodoItem() {
+        UserDefaults.standard.set(try? JSONEncoder().encode(todoItems), forKey: "todoItems")
+    }
+    
+    func saveCompletedItem() {
+        UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
+    }
+    
+    func loadTodoItem() {
+        if let data = UserDefaults.standard.value(forKey: "todoItems") as? Data {
+            if let savedTodoItems = try? JSONDecoder().decode([TodoItem].self, from: data) {
+                todoItems = savedTodoItems
+                tableView.reloadData()
+            }
         }
     }
 }
