@@ -7,12 +7,6 @@
 
 import UIKit
 
-struct TodoItem: Codable {
-    var title: String
-    var isCompleted: Bool
-    var dueDate: Date?
-}
-
 class TodoViewController: UITableViewController, TodoDetailViewControllerDelegate {
     
     var todoItems: [TodoItem] = []
