@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct TodoItem: Codable {
+struct TodoItem: Codable, Equatable {
+    var id: UUID
     var title: String
     var isCompleted: Bool
     var dueDate: Date?
+    var category: String
 }

@@ -9,6 +9,7 @@ import UIKit
 
 // 커스텀 디자인 셀, 동적 콘텐츠 구현
 class TodoTableViewCell: UITableViewCell {
+    // 토글 스위치를 커스텀 셀에 만들었으니까 토글과 관련된 코드들은 여기에 작성하는게 좋을 것 같다.
     let toggleSwitch = UISwitch()
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
