@@ -9,6 +9,8 @@ import UIKit
 
 class TodoDetailViewController: UIViewController {
     
+    var todoItem: TodoItem?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
@@ -26,7 +28,7 @@ class TodoDetailViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var dueDateLabel: UILabel!
     
-    var todoItem: TodoItem?
+    weak var delegate: TodoDetailDelegate?
     
     func updateUI() {
         if let todoItem = todoItem {
@@ -60,6 +62,7 @@ class TodoDetailViewController: UIViewController {
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd HH:mm"
             textField.text = self.todoItem?.dueDate != nil ? dateFormatter.string(from: self.todoItem!.dueDate!) : nil
+            textField.placeholder = "yyyy-MM-dd HH:mm"
         }
         
         let saveAction = UIAlertAction(title: "저장", style: .default) { [weak self, weak alertController] _ in
@@ -72,6 +75,11 @@ class TodoDetailViewController: UIViewController {
                 
                 self?.todoItem?.title = title
                 self?.todoItem?.dueDate = dueDate
+                
+                if let updatedItem = self?.todoItem {
+                    TodoManager.shared.updateTodoItem(updatedItem)
+                    CompletedManager.shared.updateTodoItem(updatedItem)
+                }
                 self?.updateUI()
             }
         }
@@ -94,13 +102,13 @@ class TodoDetailViewController: UIViewController {
         present(alertController, animated: true, completion: nil)
     }
     
-    weak var delegate: TodoDetailViewControllerDelegate?
-    
     private func deleteTodoItem() {
         guard let todoItem = todoItem else {
             return
         }
-        delegate?.deleteTodoItem(todoItem)
+        
+        TodoManager.shared.deleteTodoItem(todoItem)
+        CompletedManager.shared.deleteTodoItem(todoItem)
         //현재의 뷰 컨트롤러를 스택에서 제거하고 이전의 뷰 컨트롤러로 돌아감
         navigationController?.popViewController(animated: true)
     }

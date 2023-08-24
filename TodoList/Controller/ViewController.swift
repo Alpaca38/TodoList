@@ -17,6 +17,23 @@ class ViewController: UIViewController {
         button2.translatesAutoresizingMaskIntoConstraints = false
         
         setupConstraints()
+        
+        let imageUrlString = "https://spartacodingclub.kr/css/images/scc-og.jpg"
+        
+        if let imageUrl = URL(string: imageUrlString) {
+            URLSession.shared.dataTask(with: imageUrl) { (data, response, error) in
+                if let error {
+                    print("Error downloading image: \(error)")
+                    return
+                }
+                
+                if let imageData = data, let image = UIImage(data: imageData) {
+                    DispatchQueue.main.async {
+                        self.image1.image = image
+                    }
+                }
+            }.resume()
+        }
     }
     
     @IBOutlet weak var image1: UIImageView!

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompletedViewController: UITableViewController, TodoDetailViewControllerDelegate {
+class CompletedViewController: UITableViewController, TodoDetailDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -15,16 +15,17 @@ class CompletedViewController: UITableViewController, TodoDetailViewControllerDe
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        loadCompletedItem()
+        CompletedManager.shared.loadCompletedItem()
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return DataManager.shared.completedItems.count
+        return CompletedManager.shared.completedItems.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompletedTodoCell", for: indexPath)
-        let completedItem = DataManager.shared.completedItems[indexPath.row]
+        let completedItem = CompletedManager.shared.completedItems[indexPath.row]
         
         cell.textLabel?.text = completedItem.title
         
@@ -32,7 +33,7 @@ class CompletedViewController: UITableViewController, TodoDetailViewControllerDe
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedTodoItem = DataManager.shared.completedItems[indexPath.row]
+        let selectedTodoItem = CompletedManager.shared.completedItems[indexPath.row]
         performSegue(withIdentifier: "ShowTodoDetail", sender: selectedTodoItem)
     }
     
@@ -56,35 +57,19 @@ class CompletedViewController: UITableViewController, TodoDetailViewControllerDe
     }
     
     func deleteTodoItem(_ item: TodoItem) {
-        if let index = DataManager.shared.completedItems.firstIndex(where: { $0.title == item.title}) {
-            DataManager.shared.completedItems.remove(at: index)
-            saveCompletedItem()
-            tableView.reloadData()
-        }
+        CompletedManager.shared.deleteTodoItem(item)
+        tableView.reloadData()
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            DataManager.shared.completedItems.remove(at: indexPath.row)
+            CompletedManager.shared.completedItems.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            saveCompletedItem()
+            CompletedManager.shared.saveCompletedItem()
         }
     }
     
     override func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         return .delete
-    }
-    
-    func saveCompletedItem() {
-        UserDefaults.standard.set(try? JSONEncoder().encode(DataManager.shared.completedItems), forKey: "completedItems")
-    }
-    
-    func loadCompletedItem() {
-        if let data = UserDefaults.standard.value(forKey: "completedItems") as? Data {
-            if let savedTodoItems = try? JSONDecoder().decode([TodoItem].self, from: data) {
-                DataManager.shared.completedItems = savedTodoItems
-                tableView.reloadData()
-            }
-        }
     }
 }

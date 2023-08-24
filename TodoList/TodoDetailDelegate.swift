@@ -8,6 +8,6 @@
 import UIKit
 
 //객체 사이의 상호작용을 가능하게 하는 디자인 패턴
-protocol TodoDetailViewControllerDelegate: AnyObject {
+protocol TodoDetailDelegate: AnyObject {
     func deleteTodoItem(_ item: TodoItem)
 }
