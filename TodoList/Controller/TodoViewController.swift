@@ -75,8 +75,8 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     
     func deleteTodoItem(_ item: TodoItem) {
         TodoManager.shared.deleteTodoItem(item)
-            TodoManager.shared.saveTodoItem()
-            tableView.reloadData()
+        TodoManager.shared.saveTodoItem()
+        tableView.reloadData()
     }
     
     func setupNavigationBar() {
@@ -93,15 +93,11 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
         let todoItem = itemsInCategory[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoTableViewCell
+        cell.textLabel?.text = todoItem.title
         cell.toggleSwitch.isOn = todoItem.isCompleted
         cell.toggleSwitch.addTarget(self, action: #selector(toggleCompletion), for: .valueChanged)
         cell.toggleSwitch.tag = indexPath.row
         
-        if todoItem.isCompleted {
-            cell.textLabel?.attributedText = NSAttributedString(string: todoItem.title, attributes: [.strikethroughStyle: NSUnderlineStyle.single.rawValue])
-        } else {
-            cell.textLabel?.attributedText = NSAttributedString(string: todoItem.title, attributes: [.strikethroughStyle: NSUnderlineStyle(rawValue: 0)])
-        }
         return cell
     }
     
@@ -110,14 +106,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         TodoManager.shared.todoItems[index].isCompleted = sender.isOn
         tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
         
-        if let cell = tableView.cellForRow(at: IndexPath(row: index, section: 0)) {
-            if TodoManager.shared.todoItems[index].isCompleted {
-                // String을 extension해서 밑줄을 긋는 함수 생성하는 식으로 파일 따로 생성해보기
-                cell.textLabel?.attributedText = NSAttributedString(string: TodoManager.shared.todoItems[index].title, attributes: [.strikethroughStyle : NSUnderlineStyle.single.rawValue])
-            } else {
-                cell.textLabel?.attributedText = NSAttributedString(string: TodoManager.shared.todoItems[index].title, attributes: [.strikethroughStyle: NSUnderlineStyle(rawValue: 0)])
-            }
-        }
         if sender.isOn {
             moveToCompleted(at: index)
         }
