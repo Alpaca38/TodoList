@@ -262,18 +262,23 @@
                                 <rect key="frame" x="76" y="362" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Q0n-SD-sZa">
+                                <rect key="frame" x="162" y="397" width="68" height="58"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="51p-Gt-j4d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <navigationItem key="navigationItem" id="ad8-DN-aF0"/>
                     <connections>
+                        <outlet property="loadingIndicator" destination="Q0n-SD-sZa" id="X0z-lw-b39"/>
                         <outlet property="petImageView" destination="a2J-h3-ldV" id="cT5-5w-fhS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUN-6h-u0x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688" y="288"/>
+            <point key="canvasLocation" x="687.78625954198469" y="287.32394366197184"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
