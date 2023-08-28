@@ -23,6 +23,7 @@
 		D1B92A332A83E023008DD6DE /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B92A322A83E023008DD6DE /* TodoModel.swift */; };
 		D1DC5E572A98F4DB0089CDD3 /* PetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC5E562A98F4DB0089CDD3 /* PetViewController.swift */; };
 		D1DC5E5C2A9C834E0089CDD3 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = D1DC5E5B2A9C834E0089CDD3 /* Alamofire */; };
+		D1DC5E682A9CB4590089CDD3 /* catImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DC5E672A9CB4590089CDD3 /* catImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		D1A51B122A97212600985B55 /* CompletedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedManager.swift; sourceTree = "<group>"; };
 		D1B92A322A83E023008DD6DE /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
 		D1DC5E562A98F4DB0089CDD3 /* PetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PetViewController.swift; sourceTree = "<group>"; };
+		D1DC5E672A9CB4590089CDD3 /* catImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = catImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				D1B92A322A83E023008DD6DE /* TodoModel.swift */,
 				D1A51B102A97211E00985B55 /* TodoManager.swift */,
 				D1A51B122A97212600985B55 /* CompletedManager.swift */,
+				D1DC5E672A9CB4590089CDD3 /* catImage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -213,6 +216,7 @@
 				D177BC782A778FEA005FD039 /* AppDelegate.swift in Sources */,
 				D1A51B112A97211E00985B55 /* TodoManager.swift in Sources */,
 				D16C03532A792B28000F48E3 /* TodoViewController.swift in Sources */,
+				D1DC5E682A9CB4590089CDD3 /* catImage.swift in Sources */,
 				D16C03552A792B3A000F48E3 /* CompletedViewController.swift in Sources */,
 				D16C03592A7B95AC000F48E3 /* TodoDetailDelegate.swift in Sources */,
 				D1DC5E572A98F4DB0089CDD3 /* PetViewController.swift in Sources */,
