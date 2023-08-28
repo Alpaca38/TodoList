@@ -13,13 +13,53 @@ class PetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadRandomCatImage()
+        loadingIndicator.hidesWhenStopped = true
+//                loadRandomCatImage()
+        loadImage()
+    }
+    
+    @IBAction func refreshButtonTapped(_ sender: UIButton) {
+//                loadRandomCatImage()
+        loadImage()
+    }
+    
+    func loadImage() {
+        loadingIndicator.startAnimating()
+        refreshButton.isEnabled = false
+        
+        let url = "https://api.thecatapi.com/v1/images/search"
+        
+        AF.request(url, method: .get).responseDecodable(of: [CatImage].self) { [weak self] response in
+            switch response.result {
+            case .success(let catImages):
+                if let imageUrl = URL(string: catImages.first!.url) {
+                    self?.loadImageFromURL(imageUrl)
+                }
+            case .failure(let error):
+                print("Error: \(error)")
+            }
+        }
+    }
+    
+    func loadImageFromURL(_ imageUrl: URL) {
+        DispatchQueue.global().async {
+            if let data = try? Data(contentsOf: imageUrl),
+               let image = UIImage(data: data) {
+                DispatchQueue.main.async { [weak self] in
+                    self?.petImageView.image = image
+                    self?.adjustImageViewSize(image: image)
+                    self?.loadingIndicator.stopAnimating()
+                    self?.refreshButton.isEnabled = true
+                }
+            }
+        }
     }
     
     func loadRandomCatImage() {
-        guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else {
-            return
-        }
+        loadingIndicator.startAnimating()
+        refreshButton.isEnabled = false
+        
+        guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else {return}
         
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             if let error = error {
@@ -36,6 +76,9 @@ class PetViewController: UIViewController {
                        let catImage = UIImage(data: imageData) {
                         DispatchQueue.main.async {
                             self?.petImageView.image = catImage
+                            self?.adjustImageViewSize(image: catImage)
+                            self?.loadingIndicator.stopAnimating()
+                            self?.refreshButton.isEnabled = true
                         }
                     }
                 } catch {
