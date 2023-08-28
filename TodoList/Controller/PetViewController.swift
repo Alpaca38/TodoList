@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class PetViewController: UIViewController {
     
@@ -18,12 +19,46 @@ class PetViewController: UIViewController {
         super.viewDidLoad()
         loadingIndicator.hidesWhenStopped = true
         loadRandomCatImage()
+//        loadImage()
     }
     
     @IBAction func refreshButtonTapped(_ sender: UIButton) {
         loadRandomCatImage()
+//        loadImage()
     }
     
+    func loadImage() {
+        loadingIndicator.startAnimating()
+        refreshButton.isEnabled = false
+        guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else {
+            loadingIndicator.stopAnimating()
+            refreshButton.isEnabled = true
+            return
+        }
+        
+        let request = AF.request(url, method: .get)
+        
+        request.responseData{ [weak self] response in
+            guard let self = self else {return}
+            defer {
+                DispatchQueue.main.async {
+                    self.loadingIndicator.stopAnimating()
+                    self.refreshButton.isEnabled = true
+                }
+            }
+            switch response.result {
+            case .success(let imageData):
+                    if let image = UIImage(data: imageData) {
+                        DispatchQueue.main.async {
+                            self.petImageView.image = image
+                            self.adjustImageViewSize(image: image)
+                        }
+                    }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
     
     func loadRandomCatImage() {
         loadingIndicator.startAnimating()
