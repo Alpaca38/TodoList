@@ -56,6 +56,7 @@ class PetViewController: UIViewController {
                        let catImage = UIImage(data: imageData) {
                         DispatchQueue.main.async {
                             self?.petImageView.image = catImage
+                            self?.adjustImageViewSize(image: catImage)
                         }
                     }
                 } catch {
@@ -63,5 +64,13 @@ class PetViewController: UIViewController {
                 }
             }
         }.resume()
+    }
+    
+    func adjustImageViewSize(image: UIImage) {
+        let imageSize = image.size
+        let aspectRatio = imageSize.width / imageSize.height
+        let targetWidth = petImageView.frame.width
+        let targetHeight = targetWidth / aspectRatio
+        petImageView.frame.size = CGSize(width: targetWidth, height: targetHeight)
     }
 }
