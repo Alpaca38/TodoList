@@ -9,6 +9,8 @@ import UIKit
 
 class PetViewController: UIViewController {
     
+    
+    @IBOutlet weak var refreshButton: UIButton!
     @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var petImageView: UIImageView!
     
@@ -18,10 +20,17 @@ class PetViewController: UIViewController {
         loadRandomCatImage()
     }
     
+    @IBAction func refreshButtonTapped(_ sender: UIButton) {
+        loadRandomCatImage()
+    }
+    
+    
     func loadRandomCatImage() {
         loadingIndicator.startAnimating()
+        refreshButton.isEnabled = false
         guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else {
             loadingIndicator.stopAnimating()
+            refreshButton.isEnabled = true
             return
         }
         
@@ -30,6 +39,7 @@ class PetViewController: UIViewController {
             defer {
                 DispatchQueue.main.async {
                     self?.loadingIndicator.stopAnimating()
+                    self?.refreshButton.isEnabled = true
                 }
             }
             if let error = error {

@@ -266,6 +266,15 @@
                                 <rect key="frame" x="162" y="397" width="68" height="58"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqI-BK-ZGX">
+                                <rect key="frame" x="172" y="592" width="50" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise.circle" catalog="system"/>
+                                <connections>
+                                    <action selector="refreshButtonTapped:" destination="B7h-2v-Jv7" eventType="touchUpInside" id="RN5-Kp-0vt"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="51p-Gt-j4d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -274,6 +283,7 @@
                     <connections>
                         <outlet property="loadingIndicator" destination="Q0n-SD-sZa" id="X0z-lw-b39"/>
                         <outlet property="petImageView" destination="a2J-h3-ldV" id="cT5-5w-fhS"/>
+                        <outlet property="refreshButton" destination="CqI-BK-ZGX" id="Guk-VO-FFu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUN-6h-u0x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -285,6 +295,7 @@
         <segue reference="kP5-yz-SAe"/>
     </inferredMetricsTieBreakers>
     <resources>
+        <image name="arrow.clockwise.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
