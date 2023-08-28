@@ -6,77 +6,22 @@
 //
 
 import UIKit
-import Alamofire
 
 class PetViewController: UIViewController {
     
-    
-    @IBOutlet weak var refreshButton: UIButton!
-    @IBOutlet weak var loadingIndicator: UIActivityIndicatorView!
     @IBOutlet weak var petImageView: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        loadingIndicator.hidesWhenStopped = true
         loadRandomCatImage()
-//        loadImage()
-    }
-    
-    @IBAction func refreshButtonTapped(_ sender: UIButton) {
-        loadRandomCatImage()
-//        loadImage()
-    }
-    
-    func loadImage() {
-        loadingIndicator.startAnimating()
-        refreshButton.isEnabled = false
-        guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else {
-            loadingIndicator.stopAnimating()
-            refreshButton.isEnabled = true
-            return
-        }
-        
-        let request = AF.request(url, method: .get)
-        
-        request.responseData{ [weak self] response in
-            guard let self = self else {return}
-            defer {
-                DispatchQueue.main.async {
-                    self.loadingIndicator.stopAnimating()
-                    self.refreshButton.isEnabled = true
-                }
-            }
-            switch response.result {
-            case .success(let imageData):
-                    if let image = UIImage(data: imageData) {
-                        DispatchQueue.main.async {
-                            self.petImageView.image = image
-                            self.adjustImageViewSize(image: image)
-                        }
-                    }
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
     
     func loadRandomCatImage() {
-        loadingIndicator.startAnimating()
-        refreshButton.isEnabled = false
         guard let url = URL(string: "https://api.thecatapi.com/v1/images/search") else {
-            loadingIndicator.stopAnimating()
-            refreshButton.isEnabled = true
             return
         }
         
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            // defer: 함수의 실행이 끝나기 직전에 실행
-            defer {
-                DispatchQueue.main.async {
-                    self?.loadingIndicator.stopAnimating()
-                    self?.refreshButton.isEnabled = true
-                }
-            }
             if let error = error {
                 print("Error : \(error)")
                 return
@@ -91,7 +36,6 @@ class PetViewController: UIViewController {
                        let catImage = UIImage(data: imageData) {
                         DispatchQueue.main.async {
                             self?.petImageView.image = catImage
-                            self?.adjustImageViewSize(image: catImage)
                         }
                     }
                 } catch {
@@ -99,13 +43,5 @@ class PetViewController: UIViewController {
                 }
             }
         }.resume()
-    }
-    
-    func adjustImageViewSize(image: UIImage) {
-        let imageSize = image.size
-        let aspectRatio = imageSize.width / imageSize.height
-        let targetWidth = petImageView.frame.width
-        let targetHeight = targetWidth / aspectRatio
-        petImageView.frame.size = CGSize(width: targetWidth, height: targetHeight)
     }
 }
