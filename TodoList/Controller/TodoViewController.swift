@@ -25,7 +25,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     }
     
     @IBOutlet weak var editTableView: UITableView!
-    
     @IBOutlet weak var editDoneButton: UIBarButtonItem!
     //버튼으로 isEditing모드 전환
     @IBAction func editTable(_sender: Any) {
@@ -39,7 +38,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     }
     
     @IBOutlet weak var addTodoButton: UIBarButtonItem!
-    
     
     @IBAction func addTodoItem(_ sender: Any) {
         let alertController = UIAlertController(title: "할 일 추가", message: nil, preferredStyle: .alert)
@@ -73,12 +71,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         present(alertController, animated: true, completion: nil)
     }
     
-    func deleteTodoItem(_ item: TodoItem) {
-        TodoManager.shared.deleteTodoItem(item)
-        TodoManager.shared.saveTodoItem()
-        tableView.reloadData()
-    }
-    
     func setupNavigationBar() {
         title = "Todo List"
     }
@@ -88,11 +80,15 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         categories = Array(Set(TodoManager.shared.todoItems.map { $0.category })).sorted()
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func getTodoFromCategory(at indexPath: IndexPath) -> TodoItem? {
         let category = categories[indexPath.section]
         let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
-        let todoItem = itemsInCategory[indexPath.row]
+        return itemsInCategory[indexPath.row]
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoTableViewCell
+        guard let todoItem = getTodoFromCategory(at: indexPath) else {return cell}
         cell.textLabel?.text = todoItem.title
         cell.toggleSwitch.isOn = todoItem.isCompleted
         cell.toggleSwitch.addTarget(self, action: #selector(toggleCompletion), for: .valueChanged)
@@ -102,27 +98,27 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     }
     
     @objc func toggleCompletion(_ sender: UISwitch) {
-        let index = sender.tag
-        TodoManager.shared.todoItems[index].isCompleted = sender.isOn
-        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        // 토글 버튼이 위치한 셀
+        guard let cell = sender.superview?.superview as? UITableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        guard var item = getTodoFromCategory(at: indexPath) else {return}
+        
+        item.isCompleted = sender.isOn
         
         if sender.isOn {
-            moveToCompleted(at: index)
+            moveToCompleted(at: indexPath)
         }
     }
     
-    // fade-in animation
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.alpha = 0
-        UIView.animate(withDuration: 0.5) {
-            cell.alpha = 1
-        }
-    }
-    
-    func moveToCompleted(at index: Int) {
-        let completedItem = TodoManager.shared.todoItems.remove(at: index)
+    func moveToCompleted(at indexPath: IndexPath) {
+        guard let completedItem = getTodoFromCategory(at: indexPath) else {return}
+        TodoManager.shared.todoItems.removeAll { $0.id == completedItem.id }
         TodoManager.shared.saveTodoItem()
+        
         CompletedManager.shared.addTodoItem(completedItem)
+        
         tableView.reloadData()
     }
 }
@@ -147,7 +143,6 @@ extension TodoViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return nil
     }
-    
 }
 
 // Table View Editing
@@ -155,9 +150,7 @@ extension TodoViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // category 추가
-            let category = categories[indexPath.section]
-            let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
-            let itemToDelete = itemsInCategory[indexPath.row]
+            guard let itemToDelete = getTodoFromCategory(at: indexPath) else {return}
             
             if let index = TodoManager.shared.todoItems.firstIndex(of: itemToDelete) {
                 TodoManager.shared.todoItems.remove(at: index)
@@ -187,9 +180,7 @@ extension TodoViewController {
 // Navigation
 extension TodoViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let category = categories[indexPath.section]
-        let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
-        let selectedTodoItem = itemsInCategory[indexPath.row]
+        guard let selectedTodoItem = getTodoFromCategory(at: indexPath) else {return}
         performSegue(withIdentifier: "ShowTodoDetail", sender: selectedTodoItem)
     }
     
