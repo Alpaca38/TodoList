@@ -102,12 +102,18 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     }
     
     @objc func toggleCompletion(_ sender: UISwitch) {
-        let index = sender.tag
-        TodoManager.shared.todoItems[index].isCompleted = sender.isOn
-        tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .automatic)
+        guard let cell = sender.superview?.superview as? UITableViewCell,
+              let indexPath = tableView.indexPath(for: cell) else {
+            return
+        }
+        let category = categories[indexPath.section]
+        let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
+        var item = itemsInCategory[indexPath.row]
+        
+        item.isCompleted = sender.isOn
         
         if sender.isOn {
-            moveToCompleted(at: index)
+            moveToCompleted(at: indexPath)
         }
     }
     
@@ -119,10 +125,19 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         }
     }
     
-    func moveToCompleted(at index: Int) {
-        let completedItem = TodoManager.shared.todoItems.remove(at: index)
+    func moveToCompleted(at indexPath: IndexPath) {
+        let category = categories[indexPath.section]
+        let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category}
+        let completedItem = itemsInCategory[indexPath.row]
+        TodoManager.shared.todoItems.removeAll { $0.id == completedItem.id }
         TodoManager.shared.saveTodoItem()
+        
         CompletedManager.shared.addTodoItem(completedItem)
+        
+        if itemsInCategory.isEmpty {
+            categories.remove(at: indexPath.section)
+            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
+        }
         tableView.reloadData()
     }
 }
