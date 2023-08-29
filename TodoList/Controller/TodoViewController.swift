@@ -88,11 +88,15 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         categories = Array(Set(TodoManager.shared.todoItems.map { $0.category })).sorted()
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func getTodoFromCategory(at indexPath: IndexPath) -> TodoItem? {
         let category = categories[indexPath.section]
         let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
-        let todoItem = itemsInCategory[indexPath.row]
+        return itemsInCategory[indexPath.row]
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TodoCell", for: indexPath) as! TodoTableViewCell
+        guard let todoItem = getTodoFromCategory(at: indexPath) else {return cell}
         cell.textLabel?.text = todoItem.title
         cell.toggleSwitch.isOn = todoItem.isCompleted
         cell.toggleSwitch.addTarget(self, action: #selector(toggleCompletion), for: .valueChanged)
@@ -102,13 +106,12 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     }
     
     @objc func toggleCompletion(_ sender: UISwitch) {
+        // 토글 버튼이 위치한 셀
         guard let cell = sender.superview?.superview as? UITableViewCell,
               let indexPath = tableView.indexPath(for: cell) else {
             return
         }
-        let category = categories[indexPath.section]
-        let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
-        var item = itemsInCategory[indexPath.row]
+        guard var item = getTodoFromCategory(at: indexPath) else {return}
         
         item.isCompleted = sender.isOn
         
@@ -117,27 +120,13 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         }
     }
     
-    // fade-in animation
-    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        cell.alpha = 0
-        UIView.animate(withDuration: 0.5) {
-            cell.alpha = 1
-        }
-    }
-    
     func moveToCompleted(at indexPath: IndexPath) {
-        let category = categories[indexPath.section]
-        let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category}
-        let completedItem = itemsInCategory[indexPath.row]
+        guard let completedItem = getTodoFromCategory(at: indexPath) else {return}
         TodoManager.shared.todoItems.removeAll { $0.id == completedItem.id }
         TodoManager.shared.saveTodoItem()
         
         CompletedManager.shared.addTodoItem(completedItem)
         
-        if itemsInCategory.isEmpty {
-            categories.remove(at: indexPath.section)
-            tableView.deleteSections(IndexSet(integer: indexPath.section), with: .automatic)
-        }
         tableView.reloadData()
     }
 }
@@ -170,9 +159,7 @@ extension TodoViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // category 추가
-            let category = categories[indexPath.section]
-            let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
-            let itemToDelete = itemsInCategory[indexPath.row]
+            guard let itemToDelete = getTodoFromCategory(at: indexPath) else {return}
             
             if let index = TodoManager.shared.todoItems.firstIndex(of: itemToDelete) {
                 TodoManager.shared.todoItems.remove(at: index)
@@ -202,9 +189,7 @@ extension TodoViewController {
 // Navigation
 extension TodoViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let category = categories[indexPath.section]
-        let itemsInCategory = TodoManager.shared.todoItems.filter { $0.category == category }
-        let selectedTodoItem = itemsInCategory[indexPath.row]
+        guard let selectedTodoItem = getTodoFromCategory(at: indexPath) else {return}
         performSegue(withIdentifier: "ShowTodoDetail", sender: selectedTodoItem)
     }
     
