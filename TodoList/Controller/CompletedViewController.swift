@@ -56,11 +56,6 @@ class CompletedViewController: UITableViewController, TodoDetailDelegate {
         }
     }
     
-    func deleteTodoItem(_ item: TodoItem) {
-        CompletedManager.shared.deleteTodoItem(item)
-        tableView.reloadData()
-    }
-    
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             CompletedManager.shared.completedItems.remove(at: indexPath.row)

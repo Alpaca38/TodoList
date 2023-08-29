@@ -25,7 +25,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     }
     
     @IBOutlet weak var editTableView: UITableView!
-    
     @IBOutlet weak var editDoneButton: UIBarButtonItem!
     //버튼으로 isEditing모드 전환
     @IBAction func editTable(_sender: Any) {
@@ -39,7 +38,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
     }
     
     @IBOutlet weak var addTodoButton: UIBarButtonItem!
-    
     
     @IBAction func addTodoItem(_ sender: Any) {
         let alertController = UIAlertController(title: "할 일 추가", message: nil, preferredStyle: .alert)
@@ -71,12 +69,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
         alertController.addAction(addAction)
         alertController.addAction(cancelAction)
         present(alertController, animated: true, completion: nil)
-    }
-    
-    func deleteTodoItem(_ item: TodoItem) {
-        TodoManager.shared.deleteTodoItem(item)
-        TodoManager.shared.saveTodoItem()
-        tableView.reloadData()
     }
     
     func setupNavigationBar() {
@@ -151,7 +143,6 @@ extension TodoViewController {
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return nil
     }
-    
 }
 
 // Table View Editing
