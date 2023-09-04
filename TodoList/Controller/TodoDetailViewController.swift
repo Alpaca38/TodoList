@@ -23,6 +23,7 @@ class TodoDetailViewController: UIViewController {
             self.view.transform = .identity
         }
     }
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
