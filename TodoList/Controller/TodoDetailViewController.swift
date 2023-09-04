@@ -49,7 +49,6 @@ class TodoDetailViewController: UIViewController {
         showEditAlert()
     }
     
-    
     @IBAction func deleteTodoItem(_ sender: Any) {
         showDeleteAlert()
     }
