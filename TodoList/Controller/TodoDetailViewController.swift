@@ -23,6 +23,7 @@ class TodoDetailViewController: UIViewController {
             self.view.transform = .identity
         }
     }
+    
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
@@ -48,7 +49,6 @@ class TodoDetailViewController: UIViewController {
     @IBAction func editTodoItem(_ sender: Any) {
         showEditAlert()
     }
-    
     
     @IBAction func deleteTodoItem(_ sender: Any) {
         showDeleteAlert()
