@@ -60,7 +60,6 @@ class TodoViewController: UITableViewController, TodoDetailDelegate {
                 
                 let newTodoItem = TodoItem(id: UUID(), title: title, isCompleted: false, dueDate: dueDate, category: categoryField.text ?? "")
                 TodoManager.shared.addTodoItem(newTodoItem)
-                TodoManager.shared.saveTodoItem()
                 self?.setupCategories()
                 self?.tableView.reloadData()
             }
