@@ -267,49 +267,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-h3-ldV">
-                                <rect key="frame" x="76" y="362" width="241" height="128"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-h3-ldV">
+                                <rect key="frame" x="76" y="362" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Q0n-SD-sZa">
-                                <rect key="frame" x="162" y="397" width="68" height="58"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CqI-BK-ZGX">
-                                <rect key="frame" x="171" y="723" width="50" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise.circle" catalog="system"/>
-                                <connections>
-                                    <action selector="refreshButtonTapped:" destination="B7h-2v-Jv7" eventType="touchUpInside" id="RN5-Kp-0vt"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="51p-Gt-j4d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="a2J-h3-ldV" firstAttribute="centerY" secondItem="Yvw-Bf-uos" secondAttribute="centerY" id="Fvg-WY-0b2"/>
-                            <constraint firstItem="51p-Gt-j4d" firstAttribute="trailing" secondItem="a2J-h3-ldV" secondAttribute="trailing" constant="76" id="rMj-eP-jYs"/>
-                            <constraint firstItem="a2J-h3-ldV" firstAttribute="leading" secondItem="51p-Gt-j4d" secondAttribute="leading" constant="76" id="vUj-zd-z8p"/>
-                            <constraint firstItem="a2J-h3-ldV" firstAttribute="centerX" secondItem="Yvw-Bf-uos" secondAttribute="centerX" id="xcT-N9-PmG"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ad8-DN-aF0"/>
                     <connections>
-                        <outlet property="loadingIndicator" destination="Q0n-SD-sZa" id="X0z-lw-b39"/>
                         <outlet property="petImageView" destination="a2J-h3-ldV" id="cT5-5w-fhS"/>
-                        <outlet property="refreshButton" destination="CqI-BK-ZGX" id="Guk-VO-FFu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUN-6h-u0x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="687.78625954198469" y="287.32394366197184"/>
+            <point key="canvasLocation" x="688" y="288"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
         <segue reference="kP5-yz-SAe"/>
     </inferredMetricsTieBreakers>
     <resources>
-        <image name="arrow.clockwise.circle" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
