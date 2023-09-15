@@ -29,8 +29,6 @@ class TodoDetailViewController: UIViewController {
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var dueDateLabel: UILabel!
     
-    weak var delegate: TodoDetailDelegate?
-    
     func updateUI() {
         if let todoItem = todoItem {
             nameLabel.text = todoItem.title

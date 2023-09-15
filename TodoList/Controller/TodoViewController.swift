@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TodoViewController: UITableViewController, TodoDetailDelegate {
+class TodoViewController: UITableViewController{
     
     var categories: [String] = []
     
@@ -190,7 +190,6 @@ extension TodoViewController {
             if let todoDetailVC = segue.destination as? TodoDetailViewController,
                let selectedTodoItem = sender as? TodoItem {
                 todoDetailVC.todoItem = selectedTodoItem
-                todoDetailVC.delegate = self
             }
         }
     }
