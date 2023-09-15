@@ -39,11 +39,11 @@ class ViewController: UIViewController {
     @IBOutlet weak var image1: UIImageView!
     @IBOutlet weak var button1: UIButton!
     @IBOutlet weak var button2: UIButton!
-    
+    // navigationController를 전달해야 화면 전환을 또 할 수 있다.
     @IBAction func didTapProfileDesignViewButton(_ sender: UIButton) {
         let profileDesignViewController = ProfileDesignViewController()
-        
-        self.present(profileDesignViewController, animated: true, completion: nil)
+        let navigationController = UINavigationController(rootViewController: profileDesignViewController)
+        self.present(navigationController, animated: true, completion: nil)
     }
     
     var portraitConstraints: [NSLayoutConstraint] = []

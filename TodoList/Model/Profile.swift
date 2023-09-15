@@ -8,6 +8,6 @@
 import Foundation
 
 struct Profile {
-    var username: String
-    var userAge: String
+    var userName: String
+    var userAge: Int
 }
