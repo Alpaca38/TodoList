@@ -64,6 +64,15 @@
                                     <segue destination="B7h-2v-Jv7" kind="show" id="M9p-oO-0Zo"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inp-CG-dbg">
+                                <rect key="frame" x="78" y="609" width="237" height="35"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="ProfileDesignViewController"/>
+                                <connections>
+                                    <action selector="didTapProfileDesignViewButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zEK-Lt-1qu"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>

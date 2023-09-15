@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CompletedViewController: UITableViewController, TodoDetailDelegate {
+class CompletedViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +44,6 @@ class CompletedViewController: UITableViewController, TodoDetailDelegate {
             if let todoDetailVC = segue.destination as? TodoDetailViewController,
                let selectedTodoItem = sender as? TodoItem {
                 todoDetailVC.todoItem = selectedTodoItem
-                todoDetailVC.delegate = self
             }
         }
     }

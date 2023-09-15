@@ -11,13 +11,20 @@
 		D16C03532A792B28000F48E3 /* TodoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C03522A792B28000F48E3 /* TodoViewController.swift */; };
 		D16C03552A792B3A000F48E3 /* CompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C03542A792B3A000F48E3 /* CompletedViewController.swift */; };
 		D16C03572A79D49B000F48E3 /* TodoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C03562A79D49B000F48E3 /* TodoDetailViewController.swift */; };
-		D16C03592A7B95AC000F48E3 /* TodoDetailDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D16C03582A7B95AC000F48E3 /* TodoDetailDelegate.swift */; };
 		D177BC782A778FEA005FD039 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177BC772A778FEA005FD039 /* AppDelegate.swift */; };
 		D177BC7A2A778FEA005FD039 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177BC792A778FEA005FD039 /* SceneDelegate.swift */; };
 		D177BC7C2A778FEA005FD039 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D177BC7B2A778FEA005FD039 /* ViewController.swift */; };
 		D177BC7F2A778FEA005FD039 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D177BC7D2A778FEA005FD039 /* Main.storyboard */; };
 		D177BC812A778FEA005FD039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D177BC802A778FEA005FD039 /* Assets.xcassets */; };
 		D177BC842A778FEA005FD039 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D177BC822A778FEA005FD039 /* LaunchScreen.storyboard */; };
+		D18790EF2AB28F0000C69CDD /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D18790ED2AB28F0000C69CDD /* TaskModel.xcdatamodeld */; };
+		D18790F22AB2A18300C69CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D18790F12AB2A18300C69CDD /* SnapKit */; };
+		D18790F42AB2A1D300C69CDD /* ProfileDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790F32AB2A1D300C69CDD /* ProfileDesignViewController.swift */; };
+		D18790F92AB3DAA200C69CDD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790F82AB3DAA200C69CDD /* ProfileViewController.swift */; };
+		D18790FB2AB3DAC400C69CDD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FA2AB3DAC400C69CDD /* ProfileView.swift */; };
+		D18790FD2AB3DAFA00C69CDD /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FC2AB3DAFA00C69CDD /* Profile.swift */; };
+		D18791002AB3DB4500C69CDD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FF2AB3DB4500C69CDD /* ProfileViewModel.swift */; };
+		D18791022AB430A200C69CDD /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18791012AB430A200C69CDD /* CollectionViewCell.swift */; };
 		D1A51B112A97211E00985B55 /* TodoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A51B102A97211E00985B55 /* TodoManager.swift */; };
 		D1A51B132A97212600985B55 /* CompletedManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A51B122A97212600985B55 /* CompletedManager.swift */; };
 		D1B92A332A83E023008DD6DE /* TodoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1B92A322A83E023008DD6DE /* TodoModel.swift */; };
@@ -31,7 +38,6 @@
 		D16C03522A792B28000F48E3 /* TodoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoViewController.swift; sourceTree = "<group>"; };
 		D16C03542A792B3A000F48E3 /* CompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedViewController.swift; sourceTree = "<group>"; };
 		D16C03562A79D49B000F48E3 /* TodoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailViewController.swift; sourceTree = "<group>"; };
-		D16C03582A7B95AC000F48E3 /* TodoDetailDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoDetailDelegate.swift; sourceTree = "<group>"; };
 		D177BC742A778FEA005FD039 /* TodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D177BC772A778FEA005FD039 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D177BC792A778FEA005FD039 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -40,6 +46,13 @@
 		D177BC802A778FEA005FD039 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D177BC832A778FEA005FD039 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D177BC852A778FEA005FD039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D18790EE2AB28F0000C69CDD /* TaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskModel.xcdatamodel; sourceTree = "<group>"; };
+		D18790F32AB2A1D300C69CDD /* ProfileDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignViewController.swift; sourceTree = "<group>"; };
+		D18790F82AB3DAA200C69CDD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		D18790FA2AB3DAC400C69CDD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D18790FC2AB3DAFA00C69CDD /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
+		D18790FF2AB3DB4500C69CDD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		D18791012AB430A200C69CDD /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		D1A51B102A97211E00985B55 /* TodoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoManager.swift; sourceTree = "<group>"; };
 		D1A51B122A97212600985B55 /* CompletedManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompletedManager.swift; sourceTree = "<group>"; };
 		D1B92A322A83E023008DD6DE /* TodoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoModel.swift; sourceTree = "<group>"; };
@@ -53,6 +66,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D1DC5E5C2A9C834E0089CDD3 /* Alamofire in Frameworks */,
+				D18790F22AB2A18300C69CDD /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -67,6 +81,8 @@
 				D16C03542A792B3A000F48E3 /* CompletedViewController.swift */,
 				D16C03562A79D49B000F48E3 /* TodoDetailViewController.swift */,
 				D1DC5E562A98F4DB0089CDD3 /* PetViewController.swift */,
+				D18790F32AB2A1D300C69CDD /* ProfileDesignViewController.swift */,
+				D18790F82AB3DAA200C69CDD /* ProfileViewController.swift */,
 				D16C034F2A78F6F6000F48E3 /* Custom */,
 			);
 			path = Controller;
@@ -76,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				D16C03482A78D784000F48E3 /* TodoTableViewCell.swift */,
+				D18791012AB430A200C69CDD /* CollectionViewCell.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -99,17 +116,26 @@
 		D177BC762A778FEA005FD039 /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
+				D18790FE2AB3DB3300C69CDD /* ViewModel */,
 				D177BC792A778FEA005FD039 /* SceneDelegate.swift */,
 				D177BC772A778FEA005FD039 /* AppDelegate.swift */,
-				D16C03582A7B95AC000F48E3 /* TodoDetailDelegate.swift */,
 				D1B92A342A83E035008DD6DE /* Model */,
 				D1B92A352A846515008DD6DE /* View */,
 				D16C034C2A78F63A000F48E3 /* Controller */,
 				D177BC802A778FEA005FD039 /* Assets.xcassets */,
 				D177BC822A778FEA005FD039 /* LaunchScreen.storyboard */,
 				D177BC852A778FEA005FD039 /* Info.plist */,
+				D18790ED2AB28F0000C69CDD /* TaskModel.xcdatamodeld */,
 			);
 			path = TodoList;
+			sourceTree = "<group>";
+		};
+		D18790FE2AB3DB3300C69CDD /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				D18790FF2AB3DB4500C69CDD /* ProfileViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		D1B92A342A83E035008DD6DE /* Model */ = {
@@ -119,6 +145,7 @@
 				D1A51B102A97211E00985B55 /* TodoManager.swift */,
 				D1A51B122A97212600985B55 /* CompletedManager.swift */,
 				D1DC5E672A9CB4590089CDD3 /* catImage.swift */,
+				D18790FC2AB3DAFA00C69CDD /* Profile.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -127,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				D177BC7D2A778FEA005FD039 /* Main.storyboard */,
+				D18790FA2AB3DAC400C69CDD /* ProfileView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -149,6 +177,7 @@
 			name = TodoList;
 			packageProductDependencies = (
 				D1DC5E5B2A9C834E0089CDD3 /* Alamofire */,
+				D18790F12AB2A18300C69CDD /* SnapKit */,
 			);
 			productName = TodoList;
 			productReference = D177BC742A778FEA005FD039 /* TodoList.app */;
@@ -180,6 +209,7 @@
 			mainGroup = D177BC6B2A778FE9005FD039;
 			packageReferences = (
 				D1DC5E5A2A9C834E0089CDD3 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				D18790F02AB2A18300C69CDD /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = D177BC752A778FEA005FD039 /* Products */;
 			projectDirPath = "";
@@ -208,19 +238,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D18790FD2AB3DAFA00C69CDD /* Profile.swift in Sources */,
 				D177BC7C2A778FEA005FD039 /* ViewController.swift in Sources */,
 				D1A51B132A97212600985B55 /* CompletedManager.swift in Sources */,
 				D16C03572A79D49B000F48E3 /* TodoDetailViewController.swift in Sources */,
 				D1B92A332A83E023008DD6DE /* TodoModel.swift in Sources */,
+				D18790EF2AB28F0000C69CDD /* TaskModel.xcdatamodeld in Sources */,
 				D16C03492A78D784000F48E3 /* TodoTableViewCell.swift in Sources */,
 				D177BC782A778FEA005FD039 /* AppDelegate.swift in Sources */,
 				D1A51B112A97211E00985B55 /* TodoManager.swift in Sources */,
+				D18790FB2AB3DAC400C69CDD /* ProfileView.swift in Sources */,
+				D18791022AB430A200C69CDD /* CollectionViewCell.swift in Sources */,
 				D16C03532A792B28000F48E3 /* TodoViewController.swift in Sources */,
 				D1DC5E682A9CB4590089CDD3 /* catImage.swift in Sources */,
+				D18791002AB3DB4500C69CDD /* ProfileViewModel.swift in Sources */,
 				D16C03552A792B3A000F48E3 /* CompletedViewController.swift in Sources */,
-				D16C03592A7B95AC000F48E3 /* TodoDetailDelegate.swift in Sources */,
 				D1DC5E572A98F4DB0089CDD3 /* PetViewController.swift in Sources */,
+				D18790F92AB3DAA200C69CDD /* ProfileViewController.swift in Sources */,
 				D177BC7A2A778FEA005FD039 /* SceneDelegate.swift in Sources */,
+				D18790F42AB2A1D300C69CDD /* ProfileDesignViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +478,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		D18790F02AB2A18300C69CDD /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 		D1DC5E5A2A9C834E0089CDD3 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
@@ -453,12 +497,30 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		D18790F12AB2A18300C69CDD /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D18790F02AB2A18300C69CDD /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
 		D1DC5E5B2A9C834E0089CDD3 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D1DC5E5A2A9C834E0089CDD3 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		D18790ED2AB28F0000C69CDD /* TaskModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				D18790EE2AB28F0000C69CDD /* TaskModel.xcdatamodel */,
+			);
+			currentVersion = D18790EE2AB28F0000C69CDD /* TaskModel.xcdatamodel */;
+			path = TaskModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = D177BC6C2A778FEA005FD039 /* Project object */;
 }
