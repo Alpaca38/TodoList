@@ -19,13 +19,16 @@ class ProfileDesignViewController: UIViewController {
     private var navGallery: UIView!
     private var flowLayout: UICollectionViewFlowLayout!
     private var collectionView: UICollectionView!
-    private var navBar: UIView!
-
+    private var tabBar: UITabBar!
+    private var profileItem: UITabBarItem!
+    //    private var navBar: UIView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configure()
         addCollectionView()
+        configureTabBar()
     }
     
     @objc func didTapBackButton() {
@@ -141,7 +144,7 @@ private extension ProfileDesignViewController {
         followButton.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.43)
         }
-
+        
         messageButton.snp.makeConstraints { make in
             make.width.equalToSuperview().multipliedBy(0.43)
         }
@@ -153,7 +156,7 @@ private extension ProfileDesignViewController {
         }
         
         navGallery = UIView()
-//        navGallery.backgroundColor = UIColor.white
+        //        navGallery.backgroundColor = UIColor.white
         
         self.view.addSubview(navGallery)
         
@@ -184,33 +187,37 @@ private extension ProfileDesignViewController {
             make.left.right.equalToSuperview()
         }
         
-        navBar = UIView()
-        navBar.layer.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor
         
-        self.view.addSubview(navBar)
+        //        navBar = UIView()
+        //        navBar.layer.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor
+        //
+        //        self.view.addSubview(navBar)
+        //
+        //        navBar.snp.makeConstraints { make in
+        //            make.top.equalTo(navGallery.snp.bottom).offset(350)
+        //            make.left.equalToSuperview().offset(17)
+        //            make.right.equalToSuperview().offset(-17)
+        //            make.bottom.equalToSuperview()
+        //        }
+        //
+        //        let profileButton = UIButton()
+        //        profileButton.setImage(UIImage(named: "Profile - Fill"), for: .normal)
+        //        profileButton.addTarget(self, action: #selector(goToProfile), for: .touchUpInside)
+        //
+        //        navBar.addSubview(profileButton)
+        //
+        //        profileButton.snp.makeConstraints { make in
+        //            make.centerX.equalToSuperview()
+        //            make.centerY.equalToSuperview().offset(-20)
+        //        }
         
-        navBar.snp.makeConstraints { make in
-            make.top.equalTo(navGallery.snp.bottom).offset(350)
-            make.left.equalToSuperview().offset(17)
-            make.right.equalToSuperview().offset(-17)
-            make.bottom.equalToSuperview()
-        }
-        
-        let profileButton = UIButton()
-        profileButton.setImage(UIImage(named: "Profile - Fill"), for: .normal)
-        profileButton.addTarget(self, action: #selector(goToProfile), for: .touchUpInside)
-        
-        navBar.addSubview(profileButton)
-        
-        profileButton.snp.makeConstraints { make in
-            make.centerX.equalToSuperview()
-            make.centerY.equalToSuperview().offset(-20)
-        }
     }
     
-    @objc func goToProfile() {
-        
-    }
+    //    @objc func goToProfile() {
+    //        let profileViewController = ProfileViewController()
+    //
+    //        self.present(profileViewController, animated: true)
+    //    }
     
     func addCollectionView() {
         flowLayout = UICollectionViewFlowLayout()
@@ -229,7 +236,7 @@ private extension ProfileDesignViewController {
             make.top.equalTo(navGallery.snp.bottom)
             make.left.equalTo(navGallery.snp.left)
             make.right.equalTo(navGallery.snp.right)
-            make.bottom.equalToSuperview().offset(-130)
+            make.bottom.equalToSuperview().offset(-100)
         }
     }
     
@@ -260,6 +267,33 @@ private extension ProfileDesignViewController {
         stack.addArrangedSubview(label)
         
         return stack
+    }
+    
+    func configureTabBar() {
+        tabBar = UITabBar()
+        tabBar.delegate = self
+        // 탭 바 아이템 설정
+        profileItem = UITabBarItem(title: nil, image: UIImage(named: "Profile - Fill"), selectedImage: nil)
+        profileItem.tag = 0
+        
+        tabBar.setItems([profileItem], animated: false)
+        view.addSubview(tabBar)
+        
+        tabBar.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
+            make.left.right.equalTo(collectionView)
+            make.bottom.equalToSuperview()
+        }
+        
+    }
+}
+
+extension ProfileDesignViewController: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if item.tag == 0 {
+            let profileViewController = ProfileViewController()
+            self.navigationController?.pushViewController(profileViewController, animated: true)
+        }
     }
 }
 
