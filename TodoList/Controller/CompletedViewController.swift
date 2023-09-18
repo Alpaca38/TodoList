@@ -9,31 +9,41 @@ import UIKit
 
 class CompletedViewController: UITableViewController {
     
+    var selectedCompletedItem: Task?
+    var completedTasks: [Task] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        CompletedManager.shared.loadCompletedItem()
+//        CompletedManager.shared.loadCompletedItem()
+        loadCompletedTasks()
         tableView.reloadData()
     }
     
+    func loadCompletedTasks() {
+        completedTasks = TaskManager.shared.getTaskCoreData().filter { $0.isCompleted }
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return CompletedManager.shared.completedItems.count
+//        return CompletedManager.shared.completedItems.count
+        return completedTasks.count
+        
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CompletedTodoCell", for: indexPath)
-        let completedItem = CompletedManager.shared.completedItems[indexPath.row]
+        let completedTask = completedTasks[indexPath.row]
         
-        cell.textLabel?.text = completedItem.title
+        cell.textLabel?.text = completedTask.title
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let selectedTodoItem = CompletedManager.shared.completedItems[indexPath.row]
+        let selectedTodoItem = completedTasks[indexPath.row]
         performSegue(withIdentifier: "ShowTodoDetail", sender: selectedTodoItem)
     }
     
@@ -42,8 +52,8 @@ class CompletedViewController: UITableViewController {
             //segue.destination은 UIViewController 타입을 반환하므로 TodoDetailViewController 캐스팅
             //sender: 세그웨이에서 전달되는 데이터
             if let todoDetailVC = segue.destination as? TodoDetailViewController,
-               let selectedTodoItem = sender as? TodoItem {
-                todoDetailVC.todoItem = selectedTodoItem
+               let selectedTodoItem = sender as? Task {
+                todoDetailVC.task = selectedTodoItem
             }
         }
     }
@@ -57,9 +67,8 @@ class CompletedViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            CompletedManager.shared.completedItems.remove(at: indexPath.row)
+            completedTasks.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            CompletedManager.shared.saveCompletedItem()
         }
     }
     
