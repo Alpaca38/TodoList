@@ -42,8 +42,8 @@ class CompletedViewController: UITableViewController {
             //segue.destination은 UIViewController 타입을 반환하므로 TodoDetailViewController 캐스팅
             //sender: 세그웨이에서 전달되는 데이터
             if let todoDetailVC = segue.destination as? TodoDetailViewController,
-               let selectedTodoItem = sender as? TodoItem {
-                todoDetailVC.todoItem = selectedTodoItem
+               let selectedTodoItem = sender as? Task {
+                todoDetailVC.task = selectedTodoItem
             }
         }
     }

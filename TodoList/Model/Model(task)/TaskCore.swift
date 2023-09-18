@@ -23,7 +23,7 @@ final class TaskManager {
     
     
     // MARK: - [Create] 코어데이터에 데이터 생성하기
-    func saveTask(id: UUID?, title: String?, createDate: Date?, modifyDate: Date?, isCompleted: Bool, completion: @escaping () -> Void) {
+    func saveTask(id: UUID?, title: String?, createDate: Date?, modifyDate: Date?, isCompleted: Bool, category: Category?, completion: @escaping () -> Void) {
         if let context = context {
             if let entity = NSEntityDescription.entity(forEntityName: self.modelName, in: context) {
                 
@@ -34,6 +34,7 @@ final class TaskManager {
                 task.createDate = createDate
                 task.modifyDate = modifyDate
                 task.isCompleted = isCompleted
+                task.category = category
                 
                 appDelegate?.saveContext()
             }
@@ -71,6 +72,30 @@ final class TaskManager {
                 completion()
             } catch {
                 print("업데이트 실패")
+            }
+        }
+    }
+    
+    // MARK: - [Delete] 코어데이터에서 데이터 삭제하기 (일치하는 데이터 찾아서 ===> 삭제)
+    func deleteTask(data: Task, completion: @escaping () -> Void) {
+        guard let modifyDate = data.modifyDate else {
+            return
+        }
+        
+        if let context = context {
+            let request = NSFetchRequest<Task>(entityName: self.modelName)
+            request.predicate = NSPredicate(format: "modifyDate = %@", modifyDate as CVarArg)
+            
+            do {
+                let fetchedSnack = try context.fetch(request)
+                
+                if let targetSnack = fetchedSnack.first {
+                    context.delete(targetSnack)
+                    appDelegate?.saveContext()
+                }
+                completion()
+            } catch {
+                print("지우는 것 실패")
             }
         }
     }

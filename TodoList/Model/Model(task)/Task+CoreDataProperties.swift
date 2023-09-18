@@ -2,7 +2,7 @@
 //  Task+CoreDataProperties.swift
 //  TodoList
 //
-//  Created by 조규연 on 2023/09/15.
+//  Created by 조규연 on 2023/09/18.
 //
 //
 
@@ -21,6 +21,7 @@ extension Task {
     @NSManaged public var createDate: Date?
     @NSManaged public var modifyDate: Date?
     @NSManaged public var isCompleted: Bool
+    @NSManaged public var category: Category?
 
 }
 

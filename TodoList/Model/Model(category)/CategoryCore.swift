@@ -1,14 +1,7 @@
-//
-//  CategoryCore.swift
-//  TodoList
-//
-//  Created by 조규연 on 2023/09/15.
-//
-
 import CoreData
 import UIKit
 
-//MARK: - 관리하는 매니저 (코어데이터 관리) /
+//MARK: - To do 관리하는 매니저 (코어데이터 관리) /
 
 final class CategoryManager {
     
@@ -55,7 +48,7 @@ final class CategoryManager {
     }
     
     // MARK: - [Update] 코어데이터에서 데이터 수정하기 (일치하는 데이터 찾아서 ===> 수정)
-    func updateCategory(newToDoData: Category, completion: @escaping () -> Void) {
+    func updateTask(newToDoData: Category, completion: @escaping () -> Void) {
         
         if let context = context {
             let request = NSFetchRequest<Category>(entityName: self.modelName)
@@ -72,4 +65,3 @@ final class CategoryManager {
         }
     }
 }
-
