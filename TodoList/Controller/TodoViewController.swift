@@ -11,7 +11,6 @@ class TodoViewController: UITableViewController{
     
 //    var categories: [String] = []
     var categories: [Category] = []
-    var task: [Task] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +21,6 @@ class TodoViewController: UITableViewController{
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        TodoManager.shared.loadTodoItem()
-        loadTask()
         setupCategories()
         tableView.reloadData()
     }
@@ -120,35 +118,36 @@ class TodoViewController: UITableViewController{
     @objc func toggleCompletion(_ sender: UISwitch) {
         // 토글 버튼이 위치한 셀
         guard let cell = sender.superview?.superview as? UITableViewCell,
-              let indexPath = tableView.indexPath(for: cell) else {
+              let indexPath = tableView.indexPath(for: cell),
+              let task = getTodoFromCategory(at: indexPath) else {
             return
         }
-        guard let item = getTodoFromCategory(at: indexPath) else {return}
         
-        item.isCompleted = sender.isOn
+        task.isCompleted = sender.isOn
         
         if sender.isOn {
-            moveToCompleted(at: indexPath)
+            if let completedVC = storyboard?.instantiateViewController(withIdentifier: "ShowCompleted") as? CompletedViewController {
+                completedVC.selectedCompletedItem = task
+            }
+            TaskManager.shared.updateTask(newToDoData: task) {
+                print("완료상태 저장")
+            }
         }
-    }
+}
     
-    func moveToCompleted(at indexPath: IndexPath) {
-        guard let completedItem = getTodoFromCategory(at: indexPath) else {return}
-//        TodoManager.shared.todoItems.removeAll { $0.id == completedItem.id }
-//        TodoManager.shared.saveTodoItem()
-        TaskManager.shared.deleteTask(data: completedItem) {
-            print("삭제 성공")
-        }
-        
-//        CompletedManager.shared.addTodoItem(completedItem)
-        
-        
-        tableView.reloadData()
-    }
-    
-    func loadTask() {
-        task = TaskManager.shared.getTaskCoreData()
-    }
+//    func moveToCompleted(at indexPath: IndexPath) {
+//        guard let completedItem = getTodoFromCategory(at: indexPath) else {return}
+////        TodoManager.shared.todoItems.removeAll { $0.id == completedItem.id }
+////        TodoManager.shared.saveTodoItem()
+//        TaskManager.shared.deleteTask(data: completedItem) {
+//            print("삭제 성공")
+//        }
+//
+////        CompletedManager.shared.addTodoItem(completedItem)
+//
+//
+//        tableView.reloadData()
+//    }
 }
 
 // Table View Data Source

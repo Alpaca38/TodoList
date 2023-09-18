@@ -186,38 +186,7 @@ private extension ProfileDesignViewController {
             make.height.equalTo(1)
             make.left.right.equalToSuperview()
         }
-        
-        
-        //        navBar = UIView()
-        //        navBar.layer.backgroundColor = UIColor(red: 0.98, green: 0.98, blue: 0.98, alpha: 1).cgColor
-        //
-        //        self.view.addSubview(navBar)
-        //
-        //        navBar.snp.makeConstraints { make in
-        //            make.top.equalTo(navGallery.snp.bottom).offset(350)
-        //            make.left.equalToSuperview().offset(17)
-        //            make.right.equalToSuperview().offset(-17)
-        //            make.bottom.equalToSuperview()
-        //        }
-        //
-        //        let profileButton = UIButton()
-        //        profileButton.setImage(UIImage(named: "Profile - Fill"), for: .normal)
-        //        profileButton.addTarget(self, action: #selector(goToProfile), for: .touchUpInside)
-        //
-        //        navBar.addSubview(profileButton)
-        //
-        //        profileButton.snp.makeConstraints { make in
-        //            make.centerX.equalToSuperview()
-        //            make.centerY.equalToSuperview().offset(-20)
-        //        }
-        
     }
-    
-    //    @objc func goToProfile() {
-    //        let profileViewController = ProfileViewController()
-    //
-    //        self.present(profileViewController, animated: true)
-    //    }
     
     func addCollectionView() {
         flowLayout = UICollectionViewFlowLayout()
