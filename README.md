@@ -32,14 +32,18 @@ UserDefaults와 CoreData의 차이
 
 MVVM 구조
 - ProfileViewController
+
 ![스크린샷 2023-09-19 오후 8 17 39](https://github.com/Alpaca38/TodoList/assets/137505484/cf7744eb-19ad-44ba-a73f-23e961748529)
 
 - Model:
+
 ![스크린샷 2023-09-19 오후 8 18 02](https://github.com/Alpaca38/TodoList/assets/137505484/470c753f-21b2-4f34-a051-ef4ea4593582)
 
 - View:
+
 ![스크린샷 2023-09-19 오후 8 18 35](https://github.com/Alpaca38/TodoList/assets/137505484/c437382f-6245-4bef-9d1e-6e7a8c27abaf)
 
 - ViewModel:
+
 ![스크린샷 2023-09-19 오후 8 19 01](https://github.com/Alpaca38/TodoList/assets/137505484/699cd95a-68e5-4d6f-959f-1de7be8245c8)
 
