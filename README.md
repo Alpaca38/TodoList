@@ -32,10 +32,10 @@ UserDefaults와 CoreData의 차이
 
 MVVM 구조
 - ProfileViewController
+
 import UIKit
 
 class ProfileViewController: UIViewController {
-    
     var viewModel: ProfileViewModel!
     
     var nameLabel: UILabel!
@@ -50,6 +50,7 @@ class ProfileViewController: UIViewController {
 }
 
 - Model:
+
 import Foundation
 
 struct Profile {
@@ -58,6 +59,7 @@ struct Profile {
 }
 
 - View:
+
 import UIKit
 
 extension ProfileViewController {
@@ -95,6 +97,7 @@ extension ProfileViewController {
 }
 
 - ViewModel:
+
 import Foundation
 
 class ProfileViewModel {
