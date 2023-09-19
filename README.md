@@ -32,86 +32,14 @@ UserDefaults와 CoreData의 차이
 
 MVVM 구조
 - ProfileViewController
-
-import UIKit
-
-class ProfileViewController: UIViewController {
-    var viewModel: ProfileViewModel!
-    
-    var nameLabel: UILabel!
-    var ageLabel: UILabel!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        configure()
-        bindViewModel()
-    }
-}
+![스크린샷 2023-09-19 오후 8 17 39](https://github.com/Alpaca38/TodoList/assets/137505484/cf7744eb-19ad-44ba-a73f-23e961748529)
 
 - Model:
-
-import Foundation
-
-struct Profile {
-    var userName: String
-    var userAge: Int
-}
+![스크린샷 2023-09-19 오후 8 18 02](https://github.com/Alpaca38/TodoList/assets/137505484/470c753f-21b2-4f34-a051-ef4ea4593582)
 
 - View:
-
-import UIKit
-
-extension ProfileViewController {
-    func configure() {
-        nameLabel = UILabel()
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        nameLabel.textAlignment = .center
-        
-        ageLabel = UILabel()
-        ageLabel.font = UIFont.systemFont(ofSize: 16)
-        ageLabel.textAlignment = .center
-        
-        let labelStack = UIStackView(arrangedSubviews: [nameLabel, ageLabel])
-        labelStack.axis = .vertical
-        labelStack.spacing = 15
-        labelStack.distribution = .equalSpacing
-        
-        self.view.addSubview(labelStack)
-        
-        labelStack.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-    }
-    
-    func bindViewModel() {
-        viewModel = ProfileViewModel()
-        nameLabel.text = viewModel.userName
-        ageLabel.text = "Age: \(viewModel.userAge)"
-    }
-    
-    convenience init(viewModel: ProfileViewModel) {
-        self.init()
-        self.viewModel = viewModel
-    }
-}
+![스크린샷 2023-09-19 오후 8 18 35](https://github.com/Alpaca38/TodoList/assets/137505484/c437382f-6245-4bef-9d1e-6e7a8c27abaf)
 
 - ViewModel:
+![스크린샷 2023-09-19 오후 8 19 01](https://github.com/Alpaca38/TodoList/assets/137505484/699cd95a-68e5-4d6f-959f-1de7be8245c8)
 
-import Foundation
-
-class ProfileViewModel {
-    var profileModel: Profile
-    
-    var userName: String {
-        return profileModel.userName
-    }
-    
-    var userAge: Int {
-        return profileModel.userAge
-    }
-    
-    init() {
-        profileModel = Profile(userName: "규연", userAge: 26)
-    }
-}
