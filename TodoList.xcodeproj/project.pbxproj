@@ -447,6 +447,7 @@
 				DEVELOPMENT_TEAM = 3R8ZWR4KRJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoList/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -476,6 +477,7 @@
 				DEVELOPMENT_TEAM = 3R8ZWR4KRJ;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = TodoList/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "사진 접근 권한이 필요합니다.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen.storyboard;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
