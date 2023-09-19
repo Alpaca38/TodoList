@@ -39,11 +39,17 @@ MVVM 구조
 
 ![스크린샷 2023-09-19 오후 8 18 02](https://github.com/Alpaca38/TodoList/assets/137505484/470c753f-21b2-4f34-a051-ef4ea4593582)
 
+데이터
 - View:
 
 ![스크린샷 2023-09-19 오후 8 18 35](https://github.com/Alpaca38/TodoList/assets/137505484/c437382f-6245-4bef-9d1e-6e7a8c27abaf)
 
+사용자 인터페이스(UI)
 - ViewModel:
 
 ![스크린샷 2023-09-19 오후 8 19 01](https://github.com/Alpaca38/TodoList/assets/137505484/699cd95a-68e5-4d6f-959f-1de7be8245c8)
 
+뷰와 모델의 중간계층, 뷰와 모델 사이의 통신
+- 모델에서 데이터를 가져와 뷰에 적합한 형식으로 가공
+- 사용자 입력을 받아 모델에 전달
+- 특정 뷰와 관련된 로직 캡슐화
