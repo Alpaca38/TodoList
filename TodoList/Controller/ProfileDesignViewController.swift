@@ -161,8 +161,10 @@ private extension ProfileDesignViewController {
         self.view.addSubview(navGallery)
         
         navGallery.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(17)
-            make.right.equalToSuperview().offset(-17)
+//            make.left.equalToSuperview().offset(17)
+//            make.right.equalToSuperview().offset(-17)
+            make.width.equalTo(UIScreen.main.bounds.width * 0.91)
+            make.centerX.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.05)
             make.top.equalTo(buttonStack.snp.bottom).offset(10)
         }

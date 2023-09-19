@@ -32,50 +32,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GPQ-1h-gxB">
-                                <rect key="frame" x="76" y="266" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="tintColor" systemColor="systemCyanColor"/>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XZ-2W-a8m">
-                                <rect key="frame" x="138" y="499" width="117" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="완료한일 보기"/>
-                                <connections>
-                                    <segue destination="MiV-tc-vKr" kind="show" id="m2h-C9-JpH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sn3-3e-UkW">
-                                <rect key="frame" x="138" y="432" width="117" height="29"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="할일 확인하기"/>
-                                <connections>
-                                    <segue destination="tFP-sk-LeM" kind="show" id="RDJ-ib-eU4"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWn-4K-S9X">
-                                <rect key="frame" x="146" y="712" width="102" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="고양이 보기"/>
-                                <connections>
-                                    <segue destination="B7h-2v-Jv7" kind="show" id="M9p-oO-0Zo"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inp-CG-dbg">
-                                <rect key="frame" x="78" y="609" width="237" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="ProfileDesignViewController"/>
-                                <connections>
-                                    <action selector="didTapProfileDesignViewButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zEK-Lt-1qu"/>
-                                </connections>
-                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="54" translatesAutoresizingMaskIntoConstraints="NO" id="TiF-4S-CA7">
+                                <rect key="frame" x="76" y="185.99999999999997" width="240" height="481.33333333333326"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GPQ-1h-gxB">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <color key="tintColor" systemColor="systemCyanColor"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sn3-3e-UkW">
+                                        <rect key="frame" x="61.666666666666664" y="182" width="116.66666666666669" height="34.333333333333343"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="할일 확인하기"/>
+                                        <connections>
+                                            <segue destination="tFP-sk-LeM" kind="show" id="RDJ-ib-eU4"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2XZ-2W-a8m">
+                                        <rect key="frame" x="61.666666666666664" y="270.33333333333331" width="116.66666666666669" height="34.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="완료한일 보기"/>
+                                        <connections>
+                                            <segue destination="MiV-tc-vKr" kind="show" id="m2h-C9-JpH"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="inp-CG-dbg">
+                                        <rect key="frame" x="2" y="358.66666666666663" width="236.33333333333334" height="34.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="ProfileDesignViewController"/>
+                                        <connections>
+                                            <action selector="didTapProfileDesignViewButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zEK-Lt-1qu"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BWn-4K-S9X">
+                                        <rect key="frame" x="69" y="447" width="102" height="34.333333333333314"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="고양이 보기"/>
+                                        <connections>
+                                            <segue destination="B7h-2v-Jv7" kind="show" id="M9p-oO-0Zo"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TiF-4S-CA7" secondAttribute="trailing" constant="77" id="3x3-xL-2l5"/>
+                            <constraint firstItem="TiF-4S-CA7" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="76" id="GX6-Yz-1FQ"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TiF-4S-CA7" secondAttribute="bottom" constant="150.66999999999999" id="bEd-ip-tPP"/>
+                            <constraint firstItem="TiF-4S-CA7" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="83" id="e9y-Eb-GQD"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fua-s1-lFD"/>
                     <connections>
@@ -267,26 +273,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-h3-ldV">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="a2J-h3-ldV">
                                 <rect key="frame" x="76" y="362" width="240" height="128"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lWc-lZ-LxT">
-                                <rect key="frame" x="186" y="416" width="20" height="20"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </activityIndicatorView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3b-V2-bHX">
-                                <rect key="frame" x="173" y="752" width="50" height="35"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G3b-V2-bHX">
+                                <rect key="frame" x="171" y="746" width="50" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.clockwise.circle" catalog="system"/>
                                 <connections>
                                     <action selector="refreshButtonTapped:" destination="B7h-2v-Jv7" eventType="touchUpInside" id="1nP-hj-lHf"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="lWc-lZ-LxT">
+                                <rect key="frame" x="186" y="416" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="51p-Gt-j4d"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="lWc-lZ-LxT" firstAttribute="centerY" secondItem="a2J-h3-ldV" secondAttribute="centerY" id="7W5-Uc-Nof"/>
+                            <constraint firstItem="51p-Gt-j4d" firstAttribute="trailing" secondItem="a2J-h3-ldV" secondAttribute="trailing" constant="77" id="HZR-nC-2YN"/>
+                            <constraint firstItem="51p-Gt-j4d" firstAttribute="trailing" secondItem="G3b-V2-bHX" secondAttribute="trailing" constant="172" id="Xm0-a7-omR"/>
+                            <constraint firstItem="51p-Gt-j4d" firstAttribute="bottom" secondItem="G3b-V2-bHX" secondAttribute="bottom" constant="37" id="YCz-eX-HyD"/>
+                            <constraint firstItem="G3b-V2-bHX" firstAttribute="top" secondItem="a2J-h3-ldV" secondAttribute="bottom" constant="256" id="jvt-pp-bwa"/>
+                            <constraint firstItem="G3b-V2-bHX" firstAttribute="leading" secondItem="51p-Gt-j4d" secondAttribute="leading" constant="171" id="mmS-eL-0qj"/>
+                            <constraint firstItem="a2J-h3-ldV" firstAttribute="leading" secondItem="51p-Gt-j4d" secondAttribute="leading" constant="76" id="qB5-ON-hlO"/>
+                            <constraint firstItem="a2J-h3-ldV" firstAttribute="top" secondItem="51p-Gt-j4d" secondAttribute="top" constant="259" id="wWx-WG-ZXS"/>
+                            <constraint firstItem="lWc-lZ-LxT" firstAttribute="centerX" secondItem="a2J-h3-ldV" secondAttribute="centerX" id="x4l-qe-dCA"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ad8-DN-aF0"/>
                     <connections>
@@ -297,11 +311,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qUN-6h-u0x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688" y="288"/>
+            <point key="canvasLocation" x="687.78625954198469" y="287.32394366197184"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="kP5-yz-SAe"/>
+        <segue reference="td9-1t-vnd"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="arrow.clockwise.circle" catalog="system" width="128" height="123"/>
