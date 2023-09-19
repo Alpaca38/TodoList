@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Photos
 
 class ProfileDesignViewController: UIViewController {
     
@@ -22,6 +23,7 @@ class ProfileDesignViewController: UIViewController {
     private var tabBar: UITabBar!
     private var profileItem: UITabBarItem!
     //    private var navBar: UIView!
+    private var fetchResult: PHFetchResult<PHAsset>!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,6 +31,7 @@ class ProfileDesignViewController: UIViewController {
         configure()
         addCollectionView()
         configureTabBar()
+        requestPhotosPermission()
     }
     
     @objc func didTapBackButton() {
@@ -161,8 +164,10 @@ private extension ProfileDesignViewController {
         self.view.addSubview(navGallery)
         
         navGallery.snp.makeConstraints { make in
-            make.left.equalToSuperview().offset(17)
-            make.right.equalToSuperview().offset(-17)
+            //            make.left.equalToSuperview().offset(17)
+            //            make.right.equalToSuperview().offset(-17)
+            make.width.equalTo(UIScreen.main.bounds.width * 0.91)
+            make.centerX.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.05)
             make.top.equalTo(buttonStack.snp.bottom).offset(10)
         }
@@ -256,6 +261,59 @@ private extension ProfileDesignViewController {
         
     }
 }
+// Photo 라이브러리 사용
+private extension ProfileDesignViewController {
+    func requestPhotosPermission() {
+        let photoAuthorizationStatusStatus = PHPhotoLibrary.authorizationStatus()
+        
+        switch photoAuthorizationStatusStatus {
+        case .authorized:
+            print("Photo Authorization status is authorized.")
+            self.requestCollection()
+            
+        case .denied:
+            print("Photo Authorization status is denied.")
+            
+        case .notDetermined:
+            print("Photo Authorization status is not determined.")
+            PHPhotoLibrary.requestAuthorization() {
+                (status) in
+                switch status {
+                case .authorized:
+                    print("User permiited.")
+                    self.requestCollection()
+                case .denied:
+                    print("User denied.")
+                    break
+                default:
+                    break
+                }
+            }
+            
+        case .restricted:
+            print("Photo Authorization status is restricted.")
+        default:
+            break
+        }
+    }
+    
+    func requestCollection() {
+        let cameraRoll: PHFetchResult<PHAssetCollection> = PHAssetCollection.fetchAssetCollections(with: .smartAlbum, subtype: .smartAlbumUserLibrary, options: nil)
+                
+                guard let cameraRollCollection = cameraRoll.firstObject else {
+                    return
+                }
+                
+                let fetchOption = PHFetchOptions()
+                fetchOption.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+                
+                self.fetchResult = PHAsset.fetchAssets(in: cameraRollCollection, options: fetchOption)
+                
+                OperationQueue.main.addOperation {
+                    self.collectionView.reloadData()
+                }
+    }
+}
 
 extension ProfileDesignViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
@@ -268,15 +326,29 @@ extension ProfileDesignViewController: UITabBarDelegate {
 
 extension ProfileDesignViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return self.fetchResult?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CollectionViewCell", for: indexPath) as! CollectionViewCell
         
-        if let image = UIImage(named: "picture \(indexPath.row + 1)") {
-            cell.configure(with: image)
+        guard let asset: PHAsset = self.fetchResult?.object(at: indexPath.row) else {
+            return cell
         }
+        
+        let targetWidth = (collectionView.bounds.width - 4) / 3
+        let targetSize = CGSize(width: targetWidth, height: targetWidth)
+        
+        PHCachingImageManager().requestImage(for: asset, targetSize: targetSize, contentMode: .aspectFit, options: nil) { image, _ in
+            if let image = image {
+                cell.configure(with: image)
+            } else {
+                print("image load error")
+            }
+        }
+//        if let image = UIImage(named: "picture \(indexPath.row + 1)") {
+//            cell.configure(with: image)
+//        }
         
         return cell
     }
