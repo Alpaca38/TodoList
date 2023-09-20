@@ -13,6 +13,7 @@ class ProfileDesignViewController: UIViewController {
     
     private var backButton: UIButton!
     private var userNameLabel: UILabel!
+    private var menuButton: UIButton!
     private var userPic: UIImageView!
     private var nameLabel: UILabel!
     private var bioLabel: UILabel!
@@ -50,6 +51,9 @@ private extension ProfileDesignViewController {
         userNameLabel.text = "nabaecamp"
         userNameLabel.font = UIFont.boldSystemFont(ofSize: 16)
         
+        menuButton = UIButton()
+        menuButton.setImage(UIImage(named: "Menu"), for: .normal)
+        
         userPic = UIImageView()
         if let image = UIImage(named: "Ellipse 1") {
             userPic.image = image
@@ -57,23 +61,29 @@ private extension ProfileDesignViewController {
         
         self.view.addSubview(backButton)
         self.view.addSubview(userNameLabel)
+        self.view.addSubview(menuButton)
         self.view.addSubview(userPic)
         
         userNameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(20)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.topMargin)
         }
         
         backButton.snp.makeConstraints { make in
-            make.width.equalTo(40)
-            make.height.equalTo(40)
-            make.top.equalToSuperview().offset(10)
-            make.leading.equalToSuperview().offset(20)
+            make.width.height.equalTo(21)
+            make.top.equalTo(userNameLabel.snp.top)
+            make.leading.equalToSuperview().offset(16)
+        }
+        
+        menuButton.snp.makeConstraints { make in
+            make.top.equalTo(userNameLabel.snp.top)
+            make.width.height.equalTo(21)
+            make.right.equalTo(-16)
         }
         
         userPic.snp.makeConstraints { make in
             make.top.equalTo(userNameLabel.snp.bottom).offset(20)
-            make.left.equalToSuperview().offset(28)
+            make.left.equalToSuperview().offset(16)
             make.width.equalToSuperview().multipliedBy(0.2)
             make.height.equalTo(userPic.snp.width)
         }
@@ -92,7 +102,7 @@ private extension ProfileDesignViewController {
         userInfoStack.snp.makeConstraints { make in
             make.left.equalTo(userPic.snp.right).offset(20)
             make.centerY.equalTo(userPic.snp.centerY)
-            make.right.equalToSuperview().offset(-28)
+            make.right.equalToSuperview().offset(-16)
         }
         
         nameLabel = UILabel()
@@ -155,7 +165,7 @@ private extension ProfileDesignViewController {
         buttonStack.snp.makeConstraints { make in
             make.left.equalTo(userPic.snp.left)
             make.top.equalTo(profileStack.snp.bottom).offset(11)
-            make.right.equalToSuperview().offset(-28)
+            make.right.equalToSuperview().offset(-16)
         }
         
         navGallery = UIView()

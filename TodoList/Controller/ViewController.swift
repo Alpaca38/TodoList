@@ -44,6 +44,7 @@ class ViewController: UIViewController {
         let profileDesignViewController = ProfileDesignViewController()
 //        let navigationController = UINavigationController(rootViewController: profileDesignViewController)
 //        self.present(navigationController, animated: true, completion: nil)
+        profileDesignViewController.modalPresentationStyle = .fullScreen
         self.present(profileDesignViewController, animated: true, completion: nil)
     }
     
