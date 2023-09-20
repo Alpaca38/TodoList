@@ -321,7 +321,8 @@ extension ProfileDesignViewController: UITabBarDelegate {
             let user = User(name: "규연", age: 4)
             let viewModel = UserViewModel(user: user)
             let profileView = ProfileView(viewModel: viewModel)
-            self.navigationController?.pushViewController(profileView, animated: true)
+//            self.navigationController?.pushViewController(profileView, animated: true)
+            self.present(profileView, animated: true)
         }
     }
 }

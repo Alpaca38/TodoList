@@ -44,7 +44,6 @@ class ProfileView: UIViewController {
 
         configure()
     }
-    
 }
 
 private extension ProfileView {
