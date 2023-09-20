@@ -31,23 +31,21 @@ UserDefaults와 CoreData의 차이
     - 앱의 요청에 따라 필요한 정보만 가져올 수 있다.
 
 MVVM 구조
-- ProfileViewController
-
-![스크린샷 2023-09-19 오후 8 17 39](https://github.com/Alpaca38/TodoList/assets/137505484/cf7744eb-19ad-44ba-a73f-23e961748529)
 
 - Model:
 
-![스크린샷 2023-09-19 오후 8 18 02](https://github.com/Alpaca38/TodoList/assets/137505484/470c753f-21b2-4f34-a051-ef4ea4593582)
+![스크린샷 2023-09-20 오후 2 39 53](https://github.com/Alpaca38/TodoList/assets/137505484/0e1d66c2-4b98-4612-b1dd-4cb5e2cdec43)
 
 데이터
 - View:
 
-![스크린샷 2023-09-19 오후 8 18 35](https://github.com/Alpaca38/TodoList/assets/137505484/c437382f-6245-4bef-9d1e-6e7a8c27abaf)
+![스크린샷 2023-09-20 오후 2 40 39](https://github.com/Alpaca38/TodoList/assets/137505484/0a2198cd-f54f-4a1c-87e2-edc3d24ca720)
+![스크린샷 2023-09-20 오후 2 41 03](https://github.com/Alpaca38/TodoList/assets/137505484/42aec82a-e24f-4a65-ae66-af5eb299c23e)
 
 사용자 인터페이스(UI)
 - ViewModel:
 
-![스크린샷 2023-09-19 오후 8 19 01](https://github.com/Alpaca38/TodoList/assets/137505484/699cd95a-68e5-4d6f-959f-1de7be8245c8)
+![스크린샷 2023-09-20 오후 2 41 31](https://github.com/Alpaca38/TodoList/assets/137505484/39b59a76-038d-4b7b-9202-277f3966686a)
 
 뷰와 모델의 중간계층, 뷰와 모델 사이의 통신
 - 모델에서 데이터를 가져와 뷰에 적합한 형식으로 가공
