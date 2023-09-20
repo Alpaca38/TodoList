@@ -328,7 +328,7 @@ private extension ProfileDesignViewController {
 extension ProfileDesignViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if item.tag == 0 {
-            let user = User(name: "규연", age: 4)
+            let user = User(name: "규연", age: 26)
             let viewModel = UserViewModel(user: user)
             let profileView = ProfileView(viewModel: viewModel)
 //            self.navigationController?.pushViewController(profileView, animated: true)

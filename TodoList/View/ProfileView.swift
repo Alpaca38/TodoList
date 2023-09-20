@@ -26,6 +26,14 @@ class ProfileView: UIViewController {
         return label
     }()
     
+    lazy var button: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(.green, for: .normal)
+        button.setTitle("change random age", for: .normal)
+        button.addTarget(self, action: #selector(changeAge), for: .touchUpInside)
+        return button
+    }()
+    
     init(viewModel: UserViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -49,7 +57,7 @@ class ProfileView: UIViewController {
 private extension ProfileView {
     func configure() {
         
-        let labelStack = UIStackView(arrangedSubviews: [nameLabel, ageLabel])
+        let labelStack = UIStackView(arrangedSubviews: [nameLabel, ageLabel, button])
         labelStack.axis = .vertical
         labelStack.spacing = 15
         labelStack.distribution = .equalSpacing
@@ -59,6 +67,10 @@ private extension ProfileView {
         labelStack.snp.makeConstraints { make in
             make.center.equalToSuperview()
         }
+    }
+    
+    @objc func changeAge() {
+        viewModel.userAge = Int.random(in: 0..<100)
     }
 }
 
