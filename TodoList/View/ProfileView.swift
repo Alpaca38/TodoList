@@ -6,16 +6,49 @@
 //
 
 import UIKit
+import SnapKit
 
-extension ProfileViewController {
+class ProfileView: UIViewController {
+    
+    private var viewModel: UserViewModel!
+    
+    lazy var nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var ageLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 16)
+        label.textAlignment = .center
+        return label
+    }()
+    
+    init(viewModel: UserViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.viewModel.delegate = self
+        self.view.backgroundColor = .white
+        self.nameLabel.text = viewModel.userName
+        self.ageLabel.text = String(viewModel.userAge)
+
+        configure()
+    }
+    
+}
+
+private extension ProfileView {
     func configure() {
-        nameLabel = UILabel()
-        nameLabel.font = UIFont.boldSystemFont(ofSize: 20)
-        nameLabel.textAlignment = .center
-        
-        ageLabel = UILabel()
-        ageLabel.font = UIFont.systemFont(ofSize: 16)
-        ageLabel.textAlignment = .center
         
         let labelStack = UIStackView(arrangedSubviews: [nameLabel, ageLabel])
         labelStack.axis = .vertical
@@ -28,15 +61,19 @@ extension ProfileViewController {
             make.center.equalToSuperview()
         }
     }
-    
-    func bindViewModel() {
-        viewModel = ProfileViewModel()
-        nameLabel.text = viewModel.userName
-        ageLabel.text = "Age: \(viewModel.userAge)"
+}
+
+extension ProfileView: UserViewModelDelegate {
+    func updateUserName(name: String) {
+        // 업데이트 작업은 메인 스레드에서 실행되어야 한다.
+        DispatchQueue.main.async {
+            self.nameLabel.text = name
+        }
     }
     
-    convenience init(viewModel: ProfileViewModel) {
-        self.init()
-        self.viewModel = viewModel
+    func updateUserAge(age: Int) {
+        DispatchQueue.main.async {
+            self.ageLabel.text = String(age)
+        }
     }
 }

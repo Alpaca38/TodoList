@@ -20,10 +20,9 @@
 		D18790EF2AB28F0000C69CDD /* TaskModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D18790ED2AB28F0000C69CDD /* TaskModel.xcdatamodeld */; };
 		D18790F22AB2A18300C69CDD /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D18790F12AB2A18300C69CDD /* SnapKit */; };
 		D18790F42AB2A1D300C69CDD /* ProfileDesignViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790F32AB2A1D300C69CDD /* ProfileDesignViewController.swift */; };
-		D18790F92AB3DAA200C69CDD /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790F82AB3DAA200C69CDD /* ProfileViewController.swift */; };
 		D18790FB2AB3DAC400C69CDD /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FA2AB3DAC400C69CDD /* ProfileView.swift */; };
-		D18790FD2AB3DAFA00C69CDD /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FC2AB3DAFA00C69CDD /* Profile.swift */; };
-		D18791002AB3DB4500C69CDD /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FF2AB3DB4500C69CDD /* ProfileViewModel.swift */; };
+		D18790FD2AB3DAFA00C69CDD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FC2AB3DAFA00C69CDD /* User.swift */; };
+		D18791002AB3DB4500C69CDD /* UserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18790FF2AB3DB4500C69CDD /* UserViewModel.swift */; };
 		D18791022AB430A200C69CDD /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18791012AB430A200C69CDD /* CollectionViewCell.swift */; };
 		D18791102AB49AE900C69CDD /* TaskCore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D187910F2AB49AE900C69CDD /* TaskCore.swift */; };
 		D18791172AB7D19700C69CDD /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18791132AB7D19700C69CDD /* Task+CoreDataClass.swift */; };
@@ -54,10 +53,9 @@
 		D177BC852A778FEA005FD039 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D18790EE2AB28F0000C69CDD /* TaskModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TaskModel.xcdatamodel; sourceTree = "<group>"; };
 		D18790F32AB2A1D300C69CDD /* ProfileDesignViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDesignViewController.swift; sourceTree = "<group>"; };
-		D18790F82AB3DAA200C69CDD /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		D18790FA2AB3DAC400C69CDD /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
-		D18790FC2AB3DAFA00C69CDD /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
-		D18790FF2AB3DB4500C69CDD /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		D18790FC2AB3DAFA00C69CDD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D18790FF2AB3DB4500C69CDD /* UserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewModel.swift; sourceTree = "<group>"; };
 		D18791012AB430A200C69CDD /* CollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
 		D187910F2AB49AE900C69CDD /* TaskCore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCore.swift; sourceTree = "<group>"; };
 		D18791132AB7D19700C69CDD /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -94,7 +92,6 @@
 				D16C03562A79D49B000F48E3 /* TodoDetailViewController.swift */,
 				D1DC5E562A98F4DB0089CDD3 /* PetViewController.swift */,
 				D18790F32AB2A1D300C69CDD /* ProfileDesignViewController.swift */,
-				D18790F82AB3DAA200C69CDD /* ProfileViewController.swift */,
 				D16C034F2A78F6F6000F48E3 /* Custom */,
 			);
 			path = Controller;
@@ -145,7 +142,7 @@
 		D18790FE2AB3DB3300C69CDD /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				D18790FF2AB3DB4500C69CDD /* ProfileViewModel.swift */,
+				D18790FF2AB3DB4500C69CDD /* UserViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -179,7 +176,7 @@
 				D1A51B102A97211E00985B55 /* TodoManager.swift */,
 				D1A51B122A97212600985B55 /* CompletedManager.swift */,
 				D1DC5E672A9CB4590089CDD3 /* catImage.swift */,
-				D18790FC2AB3DAFA00C69CDD /* Profile.swift */,
+				D18790FC2AB3DAFA00C69CDD /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -272,7 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D18790FD2AB3DAFA00C69CDD /* Profile.swift in Sources */,
+				D18790FD2AB3DAFA00C69CDD /* User.swift in Sources */,
 				D177BC7C2A778FEA005FD039 /* ViewController.swift in Sources */,
 				D18791172AB7D19700C69CDD /* Task+CoreDataClass.swift in Sources */,
 				D1A51B132A97212600985B55 /* CompletedManager.swift in Sources */,
@@ -288,13 +285,12 @@
 				D18791102AB49AE900C69CDD /* TaskCore.swift in Sources */,
 				D16C03532A792B28000F48E3 /* TodoViewController.swift in Sources */,
 				D1DC5E682A9CB4590089CDD3 /* catImage.swift in Sources */,
-				D18791002AB3DB4500C69CDD /* ProfileViewModel.swift in Sources */,
+				D18791002AB3DB4500C69CDD /* UserViewModel.swift in Sources */,
 				D16C03552A792B3A000F48E3 /* CompletedViewController.swift in Sources */,
 				D187911C2AB812F400C69CDD /* CategoryCore.swift in Sources */,
 				D1DC5E572A98F4DB0089CDD3 /* PetViewController.swift in Sources */,
 				D18791182AB7D19700C69CDD /* Task+CoreDataProperties.swift in Sources */,
 				D187911A2AB7D19700C69CDD /* Category+CoreDataProperties.swift in Sources */,
-				D18790F92AB3DAA200C69CDD /* ProfileViewController.swift in Sources */,
 				D177BC7A2A778FEA005FD039 /* SceneDelegate.swift in Sources */,
 				D18790F42AB2A1D300C69CDD /* ProfileDesignViewController.swift in Sources */,
 			);
