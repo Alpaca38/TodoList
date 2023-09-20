@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Profile {
-    var userName: String
-    var userAge: Int
+struct User {
+    var name: String
+    var age: Int
 }

@@ -27,7 +27,7 @@ class ProfileDesignViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.view.backgroundColor = .white
         configure()
         addCollectionView()
         configureTabBar()
@@ -166,7 +166,7 @@ private extension ProfileDesignViewController {
         navGallery.snp.makeConstraints { make in
             //            make.left.equalToSuperview().offset(17)
             //            make.right.equalToSuperview().offset(-17)
-            make.width.equalTo(UIScreen.main.bounds.width * 0.91)
+            make.width.equalTo(UIScreen.main.bounds.width)
             make.centerX.equalToSuperview()
             make.height.equalToSuperview().multipliedBy(0.05)
             make.top.equalTo(buttonStack.snp.bottom).offset(10)
@@ -318,8 +318,10 @@ private extension ProfileDesignViewController {
 extension ProfileDesignViewController: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         if item.tag == 0 {
-            let profileViewController = ProfileViewController()
-            self.navigationController?.pushViewController(profileViewController, animated: true)
+            let user = User(name: "규연", age: 4)
+            let viewModel = UserViewModel(user: user)
+            let profileView = ProfileView(viewModel: viewModel)
+            self.navigationController?.pushViewController(profileView, animated: true)
         }
     }
 }
