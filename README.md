@@ -32,22 +32,18 @@ UserDefaults와 CoreData의 차이
 
 MVVM 구조
 
-- Model:
+- Model: 데이터
 
 ![스크린샷 2023-09-20 오후 2 39 53](https://github.com/Alpaca38/TodoList/assets/137505484/0e1d66c2-4b98-4612-b1dd-4cb5e2cdec43)
 
-데이터
-- View:
+- View: 사용자 인터페이스(UI)
 
 ![스크린샷 2023-09-20 오후 2 40 39](https://github.com/Alpaca38/TodoList/assets/137505484/0a2198cd-f54f-4a1c-87e2-edc3d24ca720)
 ![스크린샷 2023-09-20 오후 2 41 03](https://github.com/Alpaca38/TodoList/assets/137505484/42aec82a-e24f-4a65-ae66-af5eb299c23e)
 
-사용자 인터페이스(UI)
-- ViewModel:
+- ViewModel: 뷰와 모델의 중간계층, 뷰와 모델 사이의 통신
+    - 모델에서 데이터를 가져와 뷰에 적합한 형식으로 가공
+    - 사용자 입력을 받아 모델에 전달
+    - 특정 뷰와 관련된 로직 캡슐화
 
 ![스크린샷 2023-09-20 오후 2 41 31](https://github.com/Alpaca38/TodoList/assets/137505484/39b59a76-038d-4b7b-9202-277f3966686a)
-
-뷰와 모델의 중간계층, 뷰와 모델 사이의 통신
-- 모델에서 데이터를 가져와 뷰에 적합한 형식으로 가공
-- 사용자 입력을 받아 모델에 전달
-- 특정 뷰와 관련된 로직 캡슐화
