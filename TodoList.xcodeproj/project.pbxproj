@@ -92,18 +92,18 @@
 				D16C03562A79D49B000F48E3 /* TodoDetailViewController.swift */,
 				D1DC5E562A98F4DB0089CDD3 /* PetViewController.swift */,
 				D18790F32AB2A1D300C69CDD /* ProfileDesignViewController.swift */,
-				D16C034F2A78F6F6000F48E3 /* Custom */,
+				D16C034F2A78F6F6000F48E3 /* Cell */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		D16C034F2A78F6F6000F48E3 /* Custom */ = {
+		D16C034F2A78F6F6000F48E3 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
 				D16C03482A78D784000F48E3 /* TodoTableViewCell.swift */,
 				D18791012AB430A200C69CDD /* CollectionViewCell.swift */,
 			);
-			path = Custom;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		D177BC6B2A778FE9005FD039 = {
