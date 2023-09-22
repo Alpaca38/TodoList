@@ -274,9 +274,9 @@ private extension ProfileDesignViewController {
 // Photo 라이브러리 사용
 private extension ProfileDesignViewController {
     func requestPhotosPermission() {
-        let photoAuthorizationStatusStatus = PHPhotoLibrary.authorizationStatus()
+        let photoAuthorizationStatus = PHPhotoLibrary.authorizationStatus()
         
-        switch photoAuthorizationStatusStatus {
+        switch photoAuthorizationStatus {
         case .authorized:
             print("Photo Authorization status is authorized.")
             self.requestCollection()
